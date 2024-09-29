@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
@@ -60,5 +61,24 @@ public class UIManager : MonoBehaviour
             ui.Close();
         }
         UIDic.Clear();
+    }
+
+    public void ShowTip(string tip,Color color,Action callback = null)
+    {
+        //obj为提示的物体
+        GameObject obj = null;
+
+        Tween scale1 = obj.transform.DOScale(1, 0.2f);
+        Tween scale2 = obj.transform.DOScale(0, 0.2f);
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(scale1);
+        seq.AppendInterval(0.5f);
+        seq.Append(scale2);
+        seq.AppendCallback(delegate ()
+        {
+            callback?.Invoke();
+        });
+
     }
 }
