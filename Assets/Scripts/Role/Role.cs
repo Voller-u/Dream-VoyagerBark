@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Role : MonoBehaviour
 {
-    protected float atk;
-    protected float def;
-    protected float spd;
-    protected float maxHp;
-    protected float curHp;
+    public int atk;
+    public int def;
+    public int spd;
+    public int maxHp;
+    public int curHp;
 
-    protected int maxPower;
-    protected int curPower;
+    public int maxPower;
+    public int curPower;
 }

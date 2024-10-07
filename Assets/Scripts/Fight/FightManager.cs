@@ -25,6 +25,8 @@ public class FightManager : MonoBehaviour
         Instance = this;
     }
 
+    
+
     private void Update()
     {
         fightUnit?.OnUpdate();

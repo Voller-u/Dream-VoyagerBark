@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    protected float atk;
-    protected float def;
-    protected float spd;
-    protected float maxHp;
-    protected float minHp;
+    protected int atk;
+    protected int def;
+    protected int spd;
+    protected int maxHp;
+    protected int curHp;
+    protected int shield;
+
+    public virtual void Hurt(int atk)
+    {
+        int rem = shield - atk;
+        if(rem > 0)
+        {
+            curHp = Mathf.Clamp(curHp - rem,0, maxHp);
+        }
+        else
+        {
+            shield -= atk;
+        }
+    }
+
 }
