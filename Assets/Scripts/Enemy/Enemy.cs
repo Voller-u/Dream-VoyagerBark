@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    protected int atk;
-    protected int def;
-    protected int spd;
-    protected int maxHp;
-    protected int curHp;
-    protected int shield;
+    public int atk;
+    public int def;
+    public int spd;
+    public int maxHp;
+    public int curHp;
+    public int shield;
+
+    protected virtual void Start()
+    {
+        curHp = maxHp;
+    }
 
     public virtual void Hurt(int atk)
     {

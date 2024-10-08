@@ -12,4 +12,16 @@ public class Role : MonoBehaviour
 
     public int maxPower;
     public int curPower;
+
+    public int maxSpecialPower;
+    public int curSpecialPower;
+
+    /// <summary>
+    /// 回合开始时的初始化
+    /// </summary>
+    public virtual void Init()
+    {
+        curPower = maxPower;
+        curSpecialPower = maxSpecialPower;
+    }
 }

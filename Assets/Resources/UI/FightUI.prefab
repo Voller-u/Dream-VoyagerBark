@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8845597341815940283}
-  - component: {fileID: 2403596755557555693}
+  - component: {fileID: 4376810017313965985}
   m_Layer: 5
   m_Name: Pocket
   m_TagString: Untagged
@@ -33,10 +33,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -30, y: 90}
+  m_AnchoredPosition: {x: 200.00053, y: 89.99887}
   m_SizeDelta: {x: -460, y: 175}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2403596755557555693
+  m_Pivot: {x: 0.000000016763806, y: 0.49999997}
+--- !u!114 &4376810017313965985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,23 +45,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 299359704721038616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 255c3afffef844c48b5e74f16e2ae2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 3
-  m_Spacing: 15
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  maxCardNum: 8
+  spacing: 15
 --- !u!1 &949446186475676028
 GameObject:
   m_ObjectHideFlags: 0
