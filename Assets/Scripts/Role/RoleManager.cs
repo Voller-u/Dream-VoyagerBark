@@ -14,7 +14,7 @@ public class RoleManager : BaseManager<RoleManager>
 
     public void Init()
     {
-        FightCardManager.Instance.RoleAddCard("AttackCard", 3);
+        GameManager.Instance.RoleAddCard("AttackCard", 3);
     }
 
     

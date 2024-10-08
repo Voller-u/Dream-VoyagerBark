@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyManager : BaseManager<EnemyManager>
 {
     
-    public List<Enemy> enemyList;
+    public List<Enemy> enemyList = new List<Enemy>();
+
+
 
 }

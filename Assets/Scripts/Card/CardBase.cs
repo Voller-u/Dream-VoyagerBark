@@ -37,4 +37,6 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         transform.DOScale(1f, 0.25f);
         transform.SetSiblingIndex(index);
     }
+
+    
 }

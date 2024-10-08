@@ -8,13 +8,40 @@ public class Role : MonoBehaviour
     public int def;
     public int spd;
     public int maxHp;
-    public int curHp;
+    [SerializeField]
+    private int curHp;
+    public int CurHp
+    {
+        get => curHp;
+        set
+        {
+            curHp = Mathf.Clamp(value, 0, maxHp);
+        }
+    }
 
     public int maxPower;
-    public int curPower;
+    [SerializeField]
+    private int curPower;
+    public int CurPower
+    {
+        get => curPower;
+        set
+        {
+            curPower = Mathf.Clamp(value, 0, maxPower);
+        }
+    }
 
     public int maxSpecialPower;
-    public int curSpecialPower;
+    [SerializeField]
+    private int curSpecialPower;
+    public int CurSpecialPower
+    {
+        get => curSpecialPower;
+        set
+        {
+            curSpecialPower = Mathf.Clamp(value, 0, maxSpecialPower);
+        }
+    }
 
     /// <summary>
     /// 回合开始时的初始化

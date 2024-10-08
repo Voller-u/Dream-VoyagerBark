@@ -8,4 +8,9 @@ public class Slime : Enemy
     {
         base.Hurt(atk);
     }
+
+    public override void Act()
+    {
+        CurHp += 3;
+    }
 }

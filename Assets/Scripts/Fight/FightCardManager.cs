@@ -42,6 +42,9 @@ public class FightCardManager : MonoBehaviour
         exhaustedCardList = new List<CardBase>();
         cardList = new List<CardBase>();
 
+        //TODO 优化
+        pocket = FindObjectOfType<Pocket>().transform;
+
         unusedCardList.AddRange(RoleManager.Instance.cardList);
         Shuffle(unusedCardList);
     }
@@ -83,22 +86,56 @@ public class FightCardManager : MonoBehaviour
         }
     }
 
-    void AddCard()
+    /// <summary>
+    /// 从牌库中抽牌加入到手牌中
+    /// </summary>
+    /// <param name="num">要抽取的数量</param>
+    public void AddCard(int num = 1)
     {
-        GameObject obj = DrawCard();
-        CardBase card = obj.GetComponent<CardBase>();
-        cardList.Add(card);
-        obj.transform.SetParent(pocket,false);
-        obj.SetActive(true);
+        for(int i=0;i< num; i++)
+        {
+            GameObject obj = DrawCard();
+            CardBase card = obj.GetComponent<CardBase>();
+            cardList.Add(card);
+            obj.transform.SetParent(pocket, false);
+            obj.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// 去除指定索引的手牌
+    /// </summary>
+    /// <param name="index"></param>
+    public void RemoveCard(int index)
+    {
+        CardBase card = cardList[index];
+        cardList.RemoveAt(index);
+        usedCardList.Add(card);
+        card.transform.SetParent(pocket.parent, false);
+        card.gameObject.SetActive(false);
+        //StartCoroutine(RemoveCardCoroutine(card));
+    }
+
+    IEnumerator RemoveCardCoroutine(CardBase card)
+    {
+        yield return null;
+        card.gameObject.SetActive(false);
+
+    }
+
+    /// <summary>
+    /// 移除所有手牌
+    /// </summary>
+    public void RemoveAllCards()
+    {
+        while (cardList.Count > 0)
+        {
+            RemoveCard(0);
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            RoleManager.Instance.Init();
-            Init();
-        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -106,15 +143,6 @@ public class FightCardManager : MonoBehaviour
         }
     }
 
-    public void RoleAddCard(string cardName,int num = 1)
-    {
-        for(int i=0;i<num;i++)
-        {
-            GameObject obj = Instantiate(Resources.Load("Cards/" + cardName) as GameObject);
-            obj.SetActive(false);
-            CardBase card = obj.GetComponent<CardBase>();
-            RoleManager.Instance.cardList.Add(card);
-        }
-    }
+    
 
 }

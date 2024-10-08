@@ -23,6 +23,11 @@ public class UIBase : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public virtual void SetInteractable(bool interactable)
+    {
+        
+    }
+
 
     /// <summary>
     /// ¹Ø±ÕUI

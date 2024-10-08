@@ -8,12 +8,22 @@ public class Enemy : MonoBehaviour
     public int def;
     public int spd;
     public int maxHp;
-    public int curHp;
+    [SerializeField]
+    private int curHp;
+    public int CurHp
+    {
+        get => curHp;
+        set
+        {
+            curHp = Mathf.Clamp(value, 0, maxHp);
+        }
+    }
     public int shield;
 
     protected virtual void Start()
     {
-        curHp = maxHp;
+        curHp = maxHp/2;
+        EnemyManager.Instance.enemyList.Add(this);
     }
 
     public virtual void Hurt(int atk)
@@ -27,6 +37,11 @@ public class Enemy : MonoBehaviour
         {
             shield -= atk;
         }
+    }
+
+    public virtual void Act()
+    {
+
     }
 
 }

@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
         canvas = GetComponent<Transform>();
         UIDic = new();
     }
@@ -28,7 +29,6 @@ public class UIManager : MonoBehaviour
         else
         {
             GameObject obj = Instantiate(Resources.Load<GameObject>("UI/" + uiName),canvas);
-
             obj.name = uiName;
 
             ui = obj.GetComponent<UIBase>();
@@ -43,6 +43,11 @@ public class UIManager : MonoBehaviour
     public void HideUI(string uiName)
     {
         UIDic[uiName]?.Hide();
+    }
+
+    public void SetInteractableUI(string uiName,bool interactable)
+    {
+        UIDic[uiName]?.SetInteractable(interactable);   
     }
 
     public void CloseUI(string uiName)
