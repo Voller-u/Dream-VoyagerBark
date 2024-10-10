@@ -62,17 +62,17 @@ public class RunWay:BaseManager<RunWay>
     /// </summary>
     public void Switch()
     {
+        //如果最前面的选手刚跑完，应放到最后去
+        if (runners.Count >0 && runners[0].leftJourney == 0)
+        {
+            var runner = runners[0];
+            runner.leftJourney = lapShift;
+            runners[0] = runner;
+        }
+
         int time = int.MaxValue;
         for(int i=0;i<runners.Count;i++)
         {
-            //这位选手刚跑完，应放到最后去
-            if (runners[i].leftJourney ==0)
-            {
-                Debug.Log(runners[i].chara.name);
-                var runner = runners[i];
-                runner.leftJourney = lapShift;
-                runners[i] = runner;
-            }
             //计算最短时间
             time = Mathf.Min(time, runners[i].leftJourney / runners[i].chara.spd);
         }

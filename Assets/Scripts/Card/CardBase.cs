@@ -64,5 +64,6 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
             case CardType.BUFF:
                 break;
         }
+        FightCardManager.Instance.RemoveCard(this);
     }
 }

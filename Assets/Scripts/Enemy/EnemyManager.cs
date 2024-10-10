@@ -12,4 +12,9 @@ public class EnemyManager : BaseManager<EnemyManager>
     /// </summary>
     public Enemy targetEnemy;
 
+    /// <summary>
+    /// 行动的敌人
+    /// </summary>
+    public Enemy actEnemy;
+
 }

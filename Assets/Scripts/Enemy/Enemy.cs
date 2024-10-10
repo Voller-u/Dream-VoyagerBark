@@ -32,7 +32,7 @@ public class Enemy : Character
         int rem = shield - atk;
         if(rem <= 0)
         {
-            curHp = Mathf.Clamp(curHp - rem,0, maxHp);
+            curHp = Mathf.Clamp(curHp + rem,0, maxHp);
         }
         else
         {

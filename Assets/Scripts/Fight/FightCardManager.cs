@@ -113,7 +113,21 @@ public class FightCardManager : MonoBehaviour
         usedCardList.Add(card);
         card.transform.SetParent(pocket.parent, false);
         card.gameObject.SetActive(false);
+        card.transform.SetParent(GameObject.Find("TrashCan").transform);
+        //TODO ²¥·Å¶¯»­
         //StartCoroutine(RemoveCardCoroutine(card));
+    }
+
+    public void RemoveCard(CardBase card)
+    {
+        for(int i=0;i<cardList.Count;i++)
+        {
+            if (cardList[i] == card)
+            {
+                RemoveCard(i);
+                break;
+            }
+        }
     }
 
     IEnumerator RemoveCardCoroutine(CardBase card)

@@ -29,7 +29,7 @@ public class FightManager : MonoBehaviour
     {
         UIManager.Instance.ShowUI<FightUI>("FightUI");
         ChangeType(FightType.Init);
-        ChangeType(FightType.Player);
+        ChangeType();
 
     }
 
@@ -39,10 +39,10 @@ public class FightManager : MonoBehaviour
         fightUnit?.OnUpdate();
 
         //测试用代码
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            RunWay.Instance.Switch();
-        }
+        //if(Input.GetKeyDown(KeyCode.S))
+        //{
+        //    RunWay.Instance.Switch();
+        //}
         if(Input.GetKeyDown(KeyCode.D))
         {
             RunWay.Instance.Print();
@@ -88,15 +88,22 @@ public class FightManager : MonoBehaviour
     public void ChangeType()
     {
         //TODO
-        Debug.Log("计算速度，切换到下一回合");
+        //Debug.Log("计算速度，切换到下一回合");
 
-        if(fightUnit is FightPlayer)
+        RunWay.Instance.Switch();
+        if(RunWay.Instance.runners.Count > 0)
         {
-            ChangeType(FightType.Enemy);
-        }
-        else if(fightUnit is FightEnemy)
-        {
-            ChangeType(FightType.Player);
+            Character actor = RunWay.Instance.runners[0].chara;
+            if(actor is Role)
+            {
+                ChangeType(FightType.Player);
+            }
+            else if(actor is Enemy)
+            {
+                EnemyManager.Instance.actEnemy = actor as Enemy;
+                ChangeType(FightType.Enemy);
+                
+            }
         }
     }
 }

@@ -219,9 +219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6958f288b4bf0174dbc479d438089674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spd: 2
   atk: 1
   def: 5
-  spd: 2
   maxHp: 66
   curHp: 0
   maxPower: 3
@@ -492,12 +492,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da280999b97138b4eb846c3619d035d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spd: 1
   atk: 1
   def: 1
-  spd: 1
   maxHp: 10
   curHp: 0
   shield: 0
+--- !u!1 &1397666393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1397666394}
+  m_Layer: 0
+  m_Name: TrashCan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1397666394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397666393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 439.46335, y: 199.39871, z: -2.3080807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1469038748
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,3 +721,4 @@ SceneRoots:
   - {fileID: 1117232662}
   - {fileID: 115593016}
   - {fileID: 1184570067}
+  - {fileID: 1397666394}
