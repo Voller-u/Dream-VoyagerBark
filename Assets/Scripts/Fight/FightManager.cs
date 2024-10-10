@@ -23,7 +23,6 @@ public class FightManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
     }
 
     private void Start()
@@ -38,6 +37,16 @@ public class FightManager : MonoBehaviour
     private void Update()
     {
         fightUnit?.OnUpdate();
+
+        //≤‚ ‘”√¥˙¬Î
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            RunWay.Instance.Switch();
+        }
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            RunWay.Instance.Print();
+        }
     }
 
     /// <summary>

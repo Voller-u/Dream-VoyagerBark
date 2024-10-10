@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Role : MonoBehaviour
+public class Role : Character
 {
     public int atk;
     public int def;
-    public int spd;
     public int maxHp;
     [SerializeField]
     private int curHp;
@@ -42,6 +41,8 @@ public class Role : MonoBehaviour
             curSpecialPower = Mathf.Clamp(value, 0, maxSpecialPower);
         }
     }
+
+    
 
     /// <summary>
     /// 回合开始时的初始化

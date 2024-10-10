@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     public int atk;
     public int def;
-    public int spd;
     public int maxHp;
     [SerializeField]
     private int curHp;
@@ -20,8 +19,9 @@ public class Enemy : MonoBehaviour
     }
     public int shield;
 
-    protected virtual void Start()
+    protected new virtual void Start()
     {
+        base.Start();
         curHp = maxHp/2;
         EnemyManager.Instance.enemyList.Add(this);
         EnemyManager.Instance.targetEnemy = this;
