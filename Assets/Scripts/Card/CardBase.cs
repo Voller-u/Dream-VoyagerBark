@@ -6,9 +6,16 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 
 [Serializable]
-public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     //public CardData data;
+    [SerializeField]
+    [Header("卡牌类型")]
+    private CardType type;
+    [Header("通用点数费用")]
+    public int normalExpense;
+    [Header("角色自身点数费用")]
+    public int speicalExpense;
 
     public virtual void Effect()
     {
@@ -20,6 +27,11 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 
     }
     public virtual void Effect(Enemy enemy) 
+    {
+
+    }
+
+    public virtual void Effect(Enemy[] enemies)
     {
 
     }
@@ -38,5 +50,19 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         transform.SetSiblingIndex(index);
     }
 
-    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        switch(type)
+        {
+            case CardType.ATK:
+                Effect(EnemyManager.Instance.targetEnemy);
+                break;
+            case CardType.DEF:
+                break;
+            case CardType.SKL:
+                break;
+            case CardType.BUFF:
+                break;
+        }
+    }
 }

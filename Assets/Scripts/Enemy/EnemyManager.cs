@@ -7,6 +7,9 @@ public class EnemyManager : BaseManager<EnemyManager>
     
     public List<Enemy> enemyList = new List<Enemy>();
 
-
+    /// <summary>
+    /// 选中的目标敌人
+    /// </summary>
+    public Enemy targetEnemy;
 
 }

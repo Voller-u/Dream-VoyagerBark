@@ -31,6 +31,7 @@ public class FightManager : MonoBehaviour
         UIManager.Instance.ShowUI<FightUI>("FightUI");
         ChangeType(FightType.Init);
         ChangeType(FightType.Player);
+
     }
 
 

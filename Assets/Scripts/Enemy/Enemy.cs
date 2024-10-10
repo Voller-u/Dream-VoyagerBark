@@ -24,12 +24,13 @@ public class Enemy : MonoBehaviour
     {
         curHp = maxHp/2;
         EnemyManager.Instance.enemyList.Add(this);
+        EnemyManager.Instance.targetEnemy = this;
     }
 
     public virtual void Hurt(int atk)
     {
         int rem = shield - atk;
-        if(rem > 0)
+        if(rem <= 0)
         {
             curHp = Mathf.Clamp(curHp - rem,0, maxHp);
         }

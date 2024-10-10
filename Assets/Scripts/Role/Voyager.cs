@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Voyager : Role
 {
-    
+    private void OnEnable()
+    {
+        RoleManager.Instance.role = this;
+    }
 }
