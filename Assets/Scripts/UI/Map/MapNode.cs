@@ -6,14 +6,14 @@ using UnityEngine;
 [Serializable]
 public enum MapNodeType
 {
-    Random,
-    Reflux,
-    Rapids,
-    Monster,
-    InfernalMob,
-    Island,
-    Bonus,
-    Merchant,
+    Random,//随机事件
+    Monster,//怪物
+    InfernalMob,//精英怪
+    Island,//岛
+    Bonus,//宝箱
+    Merchant,//商人
+    Reflux,//回流
+    Rapids,//湍流
     Boss
 }
 
@@ -22,18 +22,12 @@ public class MapNode
 {
     public MapNodeType type;
 
-    /// <summary>
-    /// 左结点（可能存在）
-    /// </summary>
-    public MapNode left;
-    /// <summary>
-    /// 右结点（可能存在）
-    /// </summary>
-    public MapNode right;
+    public List<MapNode> nexts;
 
     public MapNode(MapNodeType type)
     {
         this.type = type;
+        nexts = new List<MapNode>();
     }
 
 }

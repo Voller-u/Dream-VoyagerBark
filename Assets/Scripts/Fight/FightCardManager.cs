@@ -46,7 +46,7 @@ public class FightCardManager : MonoBehaviour
         pocket = FindObjectOfType<Pocket>().transform;
 
         unusedCardList.AddRange(RoleManager.Instance.cardList);
-        Shuffle(unusedCardList);
+        Tools.Shuffle(unusedCardList);
     }
 
     public bool HaveCard()
@@ -60,31 +60,14 @@ public class FightCardManager : MonoBehaviour
         {
             unusedCardList.AddRange(usedCardList);
             usedCardList.Clear();
-            Shuffle<CardBase>(unusedCardList);
+            Tools.Shuffle<CardBase>(unusedCardList);
         }
         CardBase card = unusedCardList[^1];
         unusedCardList.RemoveAt(unusedCardList.Count - 1);
         return card.gameObject;
     }
 
-    //洗牌
-    void Shuffle<T>(List<T> array)
-    {
-        int n = array.Count;
-
-        for (int i = 0; i < n; i++)
-        {
-
-            int r = i + UnityEngine.Random.Range(0, n - i);
-
-            T t = array[r];
-
-            array[r] = array[i];
-
-            array[i] = t;
-
-        }
-    }
+    
 
     /// <summary>
     /// 从牌库中抽牌加入到手牌中
