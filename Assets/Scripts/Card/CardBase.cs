@@ -17,6 +17,8 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     [Header("角色自身点数费用")]
     public int speicalExpense;
 
+    public bool Interactable = false;
+
     public virtual void Effect()
     {
 
@@ -52,6 +54,8 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(!Interactable)
+            return;
         switch(type)
         {
             case CardType.ATK:

@@ -28,6 +28,7 @@ public class FightManager : MonoBehaviour
     private void Start()
     {
         UIManager.Instance.ShowUI<FightUI>("FightUI");
+        UIManager.Instance.ShowUI<MapUI>("MapUI");
         ChangeType(FightType.Init);
         ChangeType();
 

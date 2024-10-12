@@ -97,6 +97,7 @@ public class FightCardManager : MonoBehaviour
             GameObject obj = DrawCard();
             CardBase card = obj.GetComponent<CardBase>();
             cardList.Add(card);
+            card.Interactable = true;
             obj.transform.SetParent(pocket, false);
             obj.SetActive(true);
         }
