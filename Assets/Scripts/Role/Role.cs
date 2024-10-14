@@ -17,6 +17,7 @@ public class Role : Character
             curHp = Mathf.Clamp(value, 0, maxHp);
         }
     }
+    public int shield;
 
     public int maxPower;
     [SerializeField]
@@ -42,7 +43,11 @@ public class Role : Character
         }
     }
 
-    
+    protected new virtual void Start()
+    {
+        base.Start();
+        CurHp = maxHp;
+    }
 
     /// <summary>
     /// 回合开始时的初始化
@@ -51,5 +56,19 @@ public class Role : Character
     {
         curPower = maxPower;
         curSpecialPower = maxSpecialPower;
+    }
+
+
+    public virtual void Hurt(int damage)
+    {
+        int rem = shield - damage;
+        if (rem <= 0)
+        {
+            curHp = Mathf.Clamp(curHp + rem, 0, maxHp);
+        }
+        else
+        {
+            shield -= damage;
+        }
     }
 }

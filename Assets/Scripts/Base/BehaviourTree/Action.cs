@@ -7,17 +7,16 @@ namespace BT
 {
     public class Action : BTNode
     {
+        public Action(string name) : base(name) { }
         public UnityAction action;
+
+
 
         public void SetAction(UnityAction act)
         {
             action = act;
         }
 
-        public override bool DoEvaluate()
-        {
-            return true;
-        }
 
         public override void Tick()
         {

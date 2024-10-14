@@ -6,6 +6,7 @@ namespace BT
 {
     public class Sequence : BTNode
     {
+        public Sequence(string name) : base(name) { }
         public override bool DoEvaluate()
         {
             foreach (BTNode child in childList)

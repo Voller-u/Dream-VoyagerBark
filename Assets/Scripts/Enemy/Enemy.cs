@@ -19,30 +19,39 @@ public class Enemy : Character
     }
     public int shield;
 
+    public BTNode root;
+
     protected new virtual void Start()
     {
         base.Start();
         curHp = maxHp/2;
         EnemyManager.Instance.enemyList.Add(this);
         EnemyManager.Instance.targetEnemy = this;
+
+        InitBT();
     }
 
-    public virtual void Hurt(int atk)
+    public virtual void Hurt(int damage)
     {
-        int rem = shield - atk;
+        int rem = shield - damage;
         if(rem <= 0)
         {
             curHp = Mathf.Clamp(curHp + rem,0, maxHp);
         }
         else
         {
-            shield -= atk;
+            shield -= damage;
         }
     }
 
     public virtual void Act()
     {
 
+    }
+
+    public virtual void InitBT()
+    {
+        
     }
 
 }

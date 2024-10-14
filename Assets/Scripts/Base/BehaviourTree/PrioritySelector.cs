@@ -6,6 +6,7 @@ namespace BT
 {
     public class PrioritySelector : BTNode
     {
+        public PrioritySelector(string name) : base(name) { }
         public override bool DoEvaluate()
         {
             foreach (BTNode child in childList)

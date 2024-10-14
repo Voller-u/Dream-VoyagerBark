@@ -224,6 +224,7 @@ MonoBehaviour:
   def: 5
   maxHp: 66
   curHp: 0
+  shield: 0
   maxPower: 3
   curPower: 0
   maxSpecialPower: 1
@@ -423,7 +424,6 @@ GameObject:
   - component: {fileID: 1184570067}
   - component: {fileID: 1184570066}
   - component: {fileID: 1184570068}
-  - component: {fileID: 1184570069}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -516,48 +516,6 @@ MonoBehaviour:
   maxHp: 10
   curHp: 0
   shield: 0
---- !u!114 &1184570069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184570065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startWhenEnabled: 1
-  asynchronousLoad: 0
-  pauseWhenDisabled: 0
-  restartWhenComplete: 0
-  logTaskChanges: 0
-  group: 0
-  resetValuesOnRestart: 0
-  externalBehavior: {fileID: 0}
-  mBehaviorSource:
-    behaviorName: SlimeBehavior
-    behaviorDescription: 
-    mTaskData:
-      types: []
-      parentIndex: 
-      startIndex: 
-      variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(136.830627,-112.074638)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-3.16937256,117.925362)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None"},"DetachedTasks":[{"Type":"BehaviorDesigner.Runtime.Tasks.ComparePropertyValue","NodeData":{"Offset":"(35.6542969,154.395782)"},"ID":2,"Name":"Compare
-        Property Value","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":0},"SharedStringcomponentName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Slime"},"SharedStringpropertyName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"CurHp"},"SharedVariablecompareValue":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0}}]}'
-      fieldSerializationData:
-        typeName: []
-        fieldNameHash: 
-        startIndex: 
-        dataPosition: 
-        unityObjects:
-        - {fileID: 1184570065}
-        byteData: 
-        byteDataArray: 
-      Version: 1.7
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
 --- !u!1 &1397666393
 GameObject:
   m_ObjectHideFlags: 0

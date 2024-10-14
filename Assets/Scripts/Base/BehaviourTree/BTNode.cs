@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,11 +11,17 @@ public class BTNode
     /// <summary>
     /// 节点准入条件
     /// </summary>
-    public bool precondition;
+    public Func<bool> precondition;
     /// <summary>
     /// 是否激活
     /// </summary>
     public bool activated;
+
+    public BTNode(string name)
+    {
+        this.name = name;
+        childList = new List<BTNode>();
+    }
 
     /// <summary>
     /// 激活节点
@@ -29,7 +36,11 @@ public class BTNode
     /// </summary>
     public virtual bool DoEvaluate()
     {
-        return false;
+        if(precondition != null)
+        {
+            return precondition.Invoke();
+        }
+        return true;
     }
 
     /// <summary>
@@ -40,13 +51,27 @@ public class BTNode
 
     }
 
-    public virtual void AddChild(BTNode node)
+    public virtual BTNode AddChild(BTNode node)
     {
         childList.Add(node);
+
+        return node;
     }
 
     public virtual void RemoveChild(BTNode node)
     {
         childList.Remove(node);
+    }
+
+    public virtual BTNode FindNode(string name)
+    {
+        foreach(BTNode node in childList)
+        {
+            if (node.name == name)
+            {
+                return node;
+            }
+        }
+        return null;
     }
 }

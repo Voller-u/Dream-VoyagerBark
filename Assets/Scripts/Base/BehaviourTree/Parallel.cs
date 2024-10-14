@@ -6,10 +6,8 @@ namespace BT
 {
     public class Parallel : BTNode
     {
-        public override bool DoEvaluate()
-        {
-            return true;
-        }
+        public Parallel(string name) : base(name) { }
+
 
         public override void Tick()
         {

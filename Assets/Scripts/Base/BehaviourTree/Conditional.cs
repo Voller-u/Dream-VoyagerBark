@@ -8,6 +8,7 @@ namespace BT
 {
     public class Conditional : BTNode
     {
+        public Conditional(string name) : base(name) { }
         public Func<bool> condition;
 
         public void SetCondition(Func<bool> condition)

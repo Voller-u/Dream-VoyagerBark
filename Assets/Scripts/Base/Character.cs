@@ -15,4 +15,6 @@ public class Character : MonoBehaviour
     {
         RunWay.Instance.Remove(this);
     }
+
+
 }
