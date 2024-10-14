@@ -1,12 +1,52 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
-public class Tools
+public static class Tools
 {
+    /// <summary>
+    /// 存储并加密类的数据
+    /// </summary>
+    /// <typeparam name="T">类的类型</typeparam>
+    /// <param name="t">要存储的类</param>
+    /// <param name="path">要存储的路径</param>
+    public static void SaveClass<T>(T t,string path)
+    {
+        using(MemoryStream ms = new MemoryStream())
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(ms, t);
+
+            byte[] bytes = ms.GetBuffer();
+
+            string content = Encoding.UTF8.GetString(bytes);
+
+            File.WriteAllText(path,Encrypt(content));
+        }
+        
+    }
+
+    public static T ReadClass<T>(string path) where T : class
+    {
+        T t = null;
+
+        string content = File.ReadAllText(path);
+        content = Decrypt(content);
+
+        byte[] bytes = Encoding.UTF8.GetBytes(content);
+        using(MemoryStream ms = new MemoryStream(bytes))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            t = bf.Deserialize(ms) as T;
+        }
+        return t;
+    }
+
     /// <summary>
     /// 加密数据
     /// </summary>

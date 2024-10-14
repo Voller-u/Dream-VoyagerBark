@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MapUI : UIBase
 {
+    public MapInfo mapInfo;
     private void Awake()
     {
-        MapInfo.Instance.InitMap();
+        //MapInfo.Instance.InitMap();
     }
 }

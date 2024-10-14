@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+[Serializable]
 public class MapInfo : BaseManager<MapInfo>
 {
     [Header("≤„ ˝")]
@@ -18,7 +20,7 @@ public class MapInfo : BaseManager<MapInfo>
 
 
         GenerateMap();
-        Print();
+        //Print();
     }
 
     public void GenerateMap()
@@ -156,7 +158,7 @@ public class MapInfo : BaseManager<MapInfo>
 
 
     //≤‚ ‘”√
-    void Print()
+    public void Print()
     {
         StringBuilder s = new StringBuilder();
         for(int i=0;i<nodes.Count;i++)
