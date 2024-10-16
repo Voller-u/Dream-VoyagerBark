@@ -5,6 +5,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
+public enum CardType
+{
+    ATK,
+    MulAtk,
+    DEF,
+    SKL,
+    BUFF
+}
+
 [Serializable]
 public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
@@ -24,19 +33,7 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
 
     }
 
-    public virtual void Effect(Role role)
-    {
-
-    }
-    public virtual void Effect(Enemy enemy) 
-    {
-
-    }
-
-    public virtual void Effect(Enemy[] enemies)
-    {
-
-    }
+    
 
     private int index;
     public void OnPointerEnter(PointerEventData eventData)
@@ -56,18 +53,25 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     {
         if(!Interactable)
             return;
-        switch(type)
-        {
-            case CardType.ATK:
-                Effect(EnemyManager.Instance.targetEnemy);
-                break;
-            case CardType.DEF:
-                break;
-            case CardType.SKL:
-                break;
-            case CardType.BUFF:
-                break;
-        }
+        Effect();
+        //switch(type)
+        //{
+        //    case CardType.ATK:
+        //        Effect(EnemyManager.Instance.targetEnemy);
+        //        break;
+        //    case CardType.MulAtk:
+        //        Effect(EnemyManager.Instance.enemyList);
+        //        break;
+        //    case CardType.DEF:
+        //        Effect();
+        //        break;
+        //    case CardType.SKL:
+        //        Effect();
+        //        break;
+        //    case CardType.BUFF:
+        //        Effect();
+        //        break;
+        //}
         FightCardManager.Instance.RemoveCard(this);
     }
 }

@@ -8,8 +8,9 @@ public class AttackCard : CardBase
     [Header("¹¥»÷±¶ÂÊ")]
     public float atk;
 
-    public override void Effect(Enemy enemy)
+    public override void Effect()
     {
+        Enemy enemy = EnemyManager.Instance.targetEnemy;
         enemy.Hurt((int)(Mathf.Round(RoleManager.Instance.role.atk * atk)));
     }
 }
