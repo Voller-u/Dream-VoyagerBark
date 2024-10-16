@@ -24,9 +24,10 @@ public static class Tools
 
             byte[] bytes = ms.GetBuffer();
 
-            string content = Encoding.UTF8.GetString(bytes);
+            //string content = Encoding.UTF8.GetString(bytes);
 
-            File.WriteAllText(path,Encrypt(content));
+            //File.WriteAllText(path,Encrypt(content));
+            File.WriteAllBytes(path, Encrypt(bytes));
         }
         
     }
@@ -35,10 +36,12 @@ public static class Tools
     {
         T t = null;
 
-        string content = File.ReadAllText(path);
-        content = Decrypt(content);
+        //string content = File.ReadAllText(path);
+        //content = Decrypt(content);
 
-        byte[] bytes = Encoding.UTF8.GetBytes(content);
+        //byte[] bytes = Encoding.UTF8.GetBytes(content);
+        byte[] bytes = File.ReadAllBytes(path);
+        bytes = Decrypt(bytes);
         using(MemoryStream ms = new MemoryStream(bytes))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -52,7 +55,7 @@ public static class Tools
     /// </summary>
     /// <param name="toE">需要加密的数据内容</param>
     /// <returns></returns>
-    public static string Encrypt(string toE)
+    public static byte[] Encrypt(byte[] toEncryptArray)
     {
         byte[] keyArray = UTF8Encoding.UTF8.GetBytes("Kiana.Mei.Bronya.Seele.Theresa..");
         RijndaelManaged rDel = new RijndaelManaged();
@@ -61,10 +64,11 @@ public static class Tools
         rDel.Padding = PaddingMode.PKCS7;
         ICryptoTransform cTransform = rDel.CreateEncryptor();
 
-        byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toE);
+        //byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toE);
         byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
 
-        return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+        return resultArray;
+        //return Convert.ToBase64String(resultArray, 0, resultArray.Length);
     }
 
     /// <summary>
@@ -72,7 +76,7 @@ public static class Tools
     /// </summary>
     /// <param name="toD">需要解密的数据内容</param>
     /// <returns></returns>
-    public static string Decrypt(string toD)
+    public static byte[] Decrypt(byte[] toDecryptArray)
     {
         byte[] keyArray = UTF8Encoding.UTF8.GetBytes("Kiana.Mei.Bronya.Seele.Theresa..");
 
@@ -82,10 +86,10 @@ public static class Tools
         rDel.Padding = PaddingMode.PKCS7;
         ICryptoTransform cTransform = rDel.CreateDecryptor();
 
-        byte[] toEncryptArray = Convert.FromBase64String(toD);
-        byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+        //byte[] toEncryptArray = Convert.FromBase64String(toD);
+        byte[] resultArray = cTransform.TransformFinalBlock(toDecryptArray, 0, toDecryptArray.Length);
 
-        return UTF8Encoding.UTF8.GetString(resultArray);
+        return resultArray;
     }
 
     //洗牌

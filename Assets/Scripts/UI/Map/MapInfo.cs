@@ -5,12 +5,12 @@ using System.Text;
 using UnityEngine;
 
 [Serializable]
-public class MapInfo : BaseManager<MapInfo>
+public class MapInfo
 {
     [Header("²ãÊý")]
     public int levelNum = 12;
 
-    [SerializeField]
+    
     public List<List<MapNode>> nodes;
 
     private List<float> weightOfMapNode;

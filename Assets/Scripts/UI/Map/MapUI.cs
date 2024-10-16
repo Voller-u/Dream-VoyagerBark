@@ -7,6 +7,12 @@ public class MapUI : UIBase
     public MapInfo mapInfo;
     private void Awake()
     {
-        //MapInfo.Instance.InitMap();
+        mapInfo = new MapInfo();
+        mapInfo.InitMap();
+        mapInfo.Print();
+        Tools.SaveClass<MapInfo>(mapInfo, Application.dataPath + "map.txt");
+
+        mapInfo = Tools.ReadClass<MapInfo>(Application.dataPath + "map.txt");
+        mapInfo.Print();
     }
 }
