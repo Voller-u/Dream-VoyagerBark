@@ -16,6 +16,8 @@ public class FightPlayer : FightUnit
         Debug.Log("¥”≈∆∂—÷–≥È≈∆");
         FightCardManager.Instance.AddCard();
         UIManager.Instance.SetInteractableUI("FightUI", true);
+
+        RoleManager.Instance.role.InvokeBeginAction();
     }
 
     public override void OnUpdate()

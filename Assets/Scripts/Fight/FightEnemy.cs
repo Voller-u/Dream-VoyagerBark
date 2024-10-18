@@ -9,8 +9,11 @@ public class FightEnemy : FightUnit
         //禁掉玩家对卡牌的交互
         UIManager.Instance.SetInteractableUI("FightUI", false);
 
+        EnemyManager.Instance.actEnemy.InvokeBeginAction();
+
         EnemyManager.Instance.actEnemy.Act();
 
+        EnemyManager.Instance.actEnemy.InvokeEndAction();
         FightManager.Instance.ChangeType();
     }
 

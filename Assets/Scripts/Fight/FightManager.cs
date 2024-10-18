@@ -19,6 +19,7 @@ public class FightManager : MonoBehaviour
 
     public FightUnit fightUnit;
 
+    
 
     private void Awake()
     {
@@ -39,11 +40,6 @@ public class FightManager : MonoBehaviour
     {
         fightUnit?.OnUpdate();
 
-        //≤‚ ‘”√¥˙¬Î
-        //if(Input.GetKeyDown(KeyCode.S))
-        //{
-        //    RunWay.Instance.Switch();
-        //}
         if(Input.GetKeyDown(KeyCode.D))
         {
             RunWay.Instance.Print();
@@ -57,6 +53,7 @@ public class FightManager : MonoBehaviour
 
     public void ChangeType(FightType type)
     {
+        
         switch (type)
         {
             case FightType.Init:

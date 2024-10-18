@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Role : Character
 {
     public int atk;
     public int def;
     public int maxHp;
+
+    public Slider healthSlider;
+
     [SerializeField]
-    private int curHp;
-    public int CurHp
+    protected int curHp;
+    public  int CurHp
     {
         get => curHp;
         set
         {
             curHp = Mathf.Clamp(value, 0, maxHp);
+            healthSlider.value = (float)curHp / maxHp;
+
         }
     }
     public int shield;
@@ -64,7 +70,7 @@ public class Role : Character
         int rem = shield - damage;
         if (rem <= 0)
         {
-            curHp = Mathf.Clamp(curHp + rem, 0, maxHp);
+            CurHp = Mathf.Clamp(curHp + rem, 0, maxHp);
         }
         else
         {

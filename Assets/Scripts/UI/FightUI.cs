@@ -14,6 +14,7 @@ public class FightUI : UIBase
         endRoundButton.onClick.AddListener(() =>
         {
             FightCardManager.Instance.RemoveAllCards();
+            RoleManager.Instance.role.InvokeEndAction();
             FightManager.Instance.ChangeType();
             
         });

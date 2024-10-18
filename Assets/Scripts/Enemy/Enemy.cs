@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : Character
 {
     public int atk;
     public int def;
     public int maxHp;
+
+    public Slider healthSlider;
+
     [SerializeField]
     private int curHp;
     public int CurHp
@@ -15,6 +19,7 @@ public class Enemy : Character
         set
         {
             curHp = Mathf.Clamp(value, 0, maxHp);
+            healthSlider.value = (float)curHp / maxHp;
         }
     }
     public int shield;
@@ -24,7 +29,7 @@ public class Enemy : Character
     protected new virtual void Start()
     {
         base.Start();
-        curHp = maxHp/2;
+        CurHp = maxHp;
         EnemyManager.Instance.enemyList.Add(this);
         EnemyManager.Instance.targetEnemy = this;
 
@@ -36,7 +41,7 @@ public class Enemy : Character
         int rem = shield - damage;
         if(rem <= 0)
         {
-            curHp = Mathf.Clamp(curHp + rem,0, maxHp);
+            CurHp = Mathf.Clamp(curHp + rem,0, maxHp);
         }
         else
         {

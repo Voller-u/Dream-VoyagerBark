@@ -26,6 +26,8 @@ public class CardBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     [Header("角色自身点数费用")]
     public int speicalExpense;
 
+    private float weight;
+
     public bool Interactable = false;
 
     public virtual void Effect()
