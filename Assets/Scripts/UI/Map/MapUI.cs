@@ -7,7 +7,6 @@ public class MapUI : UIBase
     public MapInfo mapInfo = new MapInfo();
     public Transform content;
     public List<List<MapNodeItem>> mapNodeItems = new List<List<MapNodeItem>>();
-    public int curLevelNum = 0;
     
     private void Awake()
     {
@@ -19,6 +18,7 @@ public class MapUI : UIBase
         //mapInfo.Print();
 
         GenerateMap();
+
     }
 
     public void GenerateMap()
@@ -40,6 +40,7 @@ public class MapUI : UIBase
                 curNodes.Add(item);
                 mapNodeItems[i].Add(item);
             }
+            //将当前层与上一层建立连接
             if (formalNodes.Count > 0)
             {
                 for (int k = 0; k < formalNodes.Count; k++)
@@ -65,5 +66,19 @@ public class MapUI : UIBase
         
     }
 
-    
+    public override void Show()
+    {
+        base.Show();
+        for(int i = 0; i < mapNodeItems[mapInfo.curLevelNum].Count;i++)
+        {
+            mapNodeItems[mapInfo.curLevelNum][i].Active = true;
+
+        }
+    }
+
+    public void ToNextLayer()
+    {
+        mapInfo.curLevelNum++;
+    }
+
 }

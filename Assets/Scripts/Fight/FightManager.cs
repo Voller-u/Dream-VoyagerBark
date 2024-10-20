@@ -28,13 +28,23 @@ public class FightManager : MonoBehaviour
 
     private void Start()
     {
-        UIManager.Instance.ShowUI<FightUI>("FightUI");
-        UIManager.Instance.ShowUI<MapUI>("MapUI");
-        ChangeType(FightType.Init);
-        ChangeType();
+        
 
     }
 
+    /// <summary>
+    /// 战斗管理器初始化
+    /// </summary>
+    public void Init()
+    {
+        UIManager.Instance.ShowUI<FightUI>("FightUI");
+        UIManager.Instance.HideUI("MapUI");
+
+        //TODO 动态加载怪物
+
+        ChangeType(FightType.Init);
+        ChangeType();
+    }
 
     private void Update()
     {

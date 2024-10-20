@@ -17,4 +17,6 @@ public class EnemyManager : BaseManager<EnemyManager>
     /// </summary>
     public Enemy actEnemy;
 
+
+
 }

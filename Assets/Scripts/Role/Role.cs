@@ -20,7 +20,10 @@ public class Role : Character
         {
             curHp = Mathf.Clamp(value, 0, maxHp);
             healthSlider.value = (float)curHp / maxHp;
-
+            if(curHp <=0)
+            {
+                FightManager.Instance.ChangeType(FightType.Lose);
+            }
         }
     }
     public int shield;

@@ -20,6 +20,12 @@ public class Enemy : Character
         {
             curHp = Mathf.Clamp(value, 0, maxHp);
             healthSlider.value = (float)curHp / maxHp;
+
+            if(curHp <=0)
+            {
+                //¹ÖÎïËÀÍö
+                Dead();
+            }
         }
     }
     public int shield;
@@ -57,6 +63,17 @@ public class Enemy : Character
     public virtual void InitBT()
     {
         
+    }
+
+    public virtual void Dead()
+    {
+        Destroy(gameObject);
+        EnemyManager.Instance.enemyList.Remove(this);
+
+        if(EnemyManager.Instance.enemyList.Count <=0)
+        {
+            FightManager.Instance.ChangeType(FightType.Win);
+        }
     }
 
 }

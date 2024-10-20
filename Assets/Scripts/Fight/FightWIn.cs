@@ -6,7 +6,7 @@ public class FightWIn : FightUnit
 {
     public override void Init()
     {
-
+        Debug.Log("Ê¤Àû");
     }
 
     public override void OnUpdate()

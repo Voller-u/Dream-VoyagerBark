@@ -10,6 +10,7 @@ public class MapInfo
     [Header("²ãÊı")]
     public int levelNum = 12;
 
+    public int curLevelNum = 0;
     
     public List<List<MapNode>> nodes;
 

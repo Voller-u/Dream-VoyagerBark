@@ -86,4 +86,9 @@ public class UIManager : MonoBehaviour
         });
 
     }
+
+    public UIBase GetUI(string uiName)
+    {
+        return UIDic[uiName];
+    }
 }

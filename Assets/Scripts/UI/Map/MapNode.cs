@@ -14,6 +14,7 @@ public enum MapNodeType
     Merchant,//商人
     Reflux,//回流
     Rapids,//湍流
+    HitRock,//触礁
     Boss
 }
 
