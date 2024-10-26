@@ -12,7 +12,7 @@ public class GameApp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        videoPlayer.Play();
+        UIManager.Instance.ShowUI<LoginUI>("LoginUI");
     }
 
     

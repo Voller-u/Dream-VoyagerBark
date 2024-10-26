@@ -6,7 +6,8 @@ public class FightWIn : FightUnit
 {
     public override void Init()
     {
-        Debug.Log("Ê¤Àû");
+        
+        UIManager.Instance.ShowUI<FightWinUI>("FightWinUI");
     }
 
     public override void OnUpdate()

@@ -70,10 +70,6 @@ public class Enemy : Character
         Destroy(gameObject);
         EnemyManager.Instance.enemyList.Remove(this);
 
-        if(EnemyManager.Instance.enemyList.Count <=0)
-        {
-            FightManager.Instance.ChangeType(FightType.Win);
-        }
     }
 
 }

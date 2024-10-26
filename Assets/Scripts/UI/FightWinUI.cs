@@ -7,6 +7,11 @@ public class FightWinUI : UIBase
 {
     public Button toNextLevelBtn;
 
+    private void Awake()
+    {
+        toNextLevelBtn.onClick.AddListener(ToNextLvel);
+    }
+
     public void ToNextLvel()
     {
         MapUI map = UIManager.Instance.ShowUI<MapUI>("MapUI") as MapUI;
@@ -14,5 +19,6 @@ public class FightWinUI : UIBase
         {
             map.ToNextLayer();
         }
+        UIManager.Instance.HideUI("FightWinUI");
     }
 }

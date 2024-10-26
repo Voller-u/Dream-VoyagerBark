@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spd: 2
-  atk: 1
+  atk: 3
   def: 5
   maxHp: 66
   healthSlider: {fileID: 1559107340}

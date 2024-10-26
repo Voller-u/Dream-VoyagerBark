@@ -13,10 +13,16 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(Instance.gameObject);
+        }
         Instance = this;
 
         canvas = GetComponent<Transform>();
         UIDic = new();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public UIBase ShowUI<T>(string uiName) where T : UIBase
