@@ -2108,6 +2108,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FightWinUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4605027969187701785, guid: 8e235070ad9b0fc4281217d212c07722, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
