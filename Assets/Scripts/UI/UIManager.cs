@@ -46,6 +46,11 @@ public class UIManager : MonoBehaviour
         return ui;
     }
 
+    public T GetUI<T>(string uiName) where T: UIBase
+    {
+        return UIDic.ContainsKey(uiName) ? UIDic[uiName] as T : null;
+    }
+
     public void HideUI(string uiName)
     {
         UIDic[uiName]?.Hide();
@@ -93,8 +98,4 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public UIBase GetUI(string uiName)
-    {
-        return UIDic[uiName];
-    }
 }

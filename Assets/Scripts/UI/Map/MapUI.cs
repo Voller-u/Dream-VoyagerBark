@@ -1,21 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class MapUI : UIBase
 {
+    string path = Application.streamingAssetsPath + "/MapData/map";
     public MapInfo mapInfo = new MapInfo();
+    public List<MapNodeItem> selectedNodes = new List<MapNodeItem>();
     public Transform content;
     public List<List<MapNodeItem>> mapNodeItems = new List<List<MapNodeItem>>();
     
     private void Awake()
     {
-        mapInfo.InitMap();
-        //测试存取
-        //mapInfo.Print();
-        //Tools.SaveClass<MapInfo>(mapInfo,Application.dataPath + "/map.txt");
-        //mapInfo = Tools.ReadClass<MapInfo>(Application.dataPath + "/map.txt");
-        //mapInfo.Print();
+        try
+        {
+            mapInfo = Tools.ReadClass<MapInfo>(path);
+        }catch(FileNotFoundException)
+        {
+            Debug.Log("地图不存在，重新创建");
+            mapInfo.InitMap();
+            Tools.SaveClass<MapInfo>(mapInfo, path);
+        }
+        
+        
 
         GenerateMap();
 
@@ -63,21 +71,31 @@ public class MapUI : UIBase
             curNodes.Clear();
         }
 
-        
+        for (int i = 0; i < mapNodeItems[0].Count; i++)
+        {
+            mapNodeItems[0][i].Active = true;
+        }
     }
 
     public override void Show()
     {
         base.Show();
-        for(int i = 0; i < mapNodeItems[mapInfo.curLevelNum].Count;i++)
+        if(selectedNodes.Count > 0)
         {
-            mapNodeItems[mapInfo.curLevelNum][i].Active = true;
-
+            MapNodeItem node = selectedNodes[^1];
+            for(int i=0;i<node.nextNodes.Count;i++)
+            {
+                node.nextNodes[i].Active = true;
+            }
         }
     }
 
     public void ToNextLayer()
     {
+        for (int i = 0; i < mapNodeItems[mapInfo.curLevelNum].Count; i++)
+        {
+            mapNodeItems[mapInfo.curLevelNum][i].Active = false;
+        }
         mapInfo.curLevelNum++;
     }
 

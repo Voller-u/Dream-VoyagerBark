@@ -11,7 +11,8 @@ public class MapInfo
     public int levelNum = 12;
 
     public int curLevelNum = 0;
-    
+
+    [HideInInspector]
     public List<List<MapNode>> nodes;
 
     private List<float> weightOfMapNode;

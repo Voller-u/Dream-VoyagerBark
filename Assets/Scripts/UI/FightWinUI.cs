@@ -14,11 +14,15 @@ public class FightWinUI : UIBase
 
     public void ToNextLvel()
     {
-        MapUI map = UIManager.Instance.ShowUI<MapUI>("MapUI") as MapUI;
+        MapUI map = UIManager.Instance.GetUI<MapUI>("MapUI") as MapUI;
         if(map != null )
         {
             map.ToNextLayer();
+            map.Show();
         }
         UIManager.Instance.HideUI("FightWinUI");
+        UIManager.Instance.HideUI("FightUI");
+
+        //TODO ¥Ú…®’Ω≥°
     }
 }

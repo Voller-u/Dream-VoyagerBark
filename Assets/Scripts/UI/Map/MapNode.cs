@@ -22,7 +22,7 @@ public enum MapNodeType
 public class MapNode
 {
     public MapNodeType type;
-
+    [HideInInspector]
     public List<MapNode> nexts;
 
     public MapNode(MapNodeType type)

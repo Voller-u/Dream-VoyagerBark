@@ -125,7 +125,7 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
             GameManager.Instance.MapEventHandler(mapNode.type);
             active = false;
             Dead = true;
-
+            UIManager.Instance.GetUI<MapUI>("MapUI")?.selectedNodes.Add(this);
             
         }
     }
