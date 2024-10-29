@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        UIManager.Instance.ShowUI<PropertyUI>("PropertyUI");
         UIManager.Instance.ShowUI<MapUI>("MapUI");
     }
 
@@ -124,5 +126,16 @@ public class GameManager : MonoBehaviour
     void BossEventHandler()
     {
         Debug.Log("触发boss战");
+        FightManager.Instance.Init();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            MapUI mapUI = UIManager.Instance.GetUI<MapUI>("MapUI");
+            Tools.SaveClass<MapInfo>(mapUI.mapInfo,mapUI.path);
+            Debug.Log("保存地图成功");
+        }
     }
 }

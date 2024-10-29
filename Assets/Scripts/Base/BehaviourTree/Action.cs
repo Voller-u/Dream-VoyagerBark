@@ -20,7 +20,8 @@ namespace BT
 
         public override void Tick()
         {
-            action.Invoke();
+            if(precondition.Invoke())
+                action.Invoke();
         }
     }
 }

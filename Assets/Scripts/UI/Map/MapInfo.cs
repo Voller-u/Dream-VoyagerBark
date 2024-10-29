@@ -15,6 +15,11 @@ public class MapInfo
     [HideInInspector]
     public List<List<MapNode>> nodes;
 
+    /// <summary>
+    /// 当前处于的结点
+    /// </summary>
+    public MapNode curMapNode;
+
     private List<float> weightOfMapNode;
 
     public void InitMap()
@@ -55,7 +60,12 @@ public class MapInfo
         int x = UnityEngine.Random.Range(3, 6);
         //添加第一层结点
         for (int i = 0; i < x; i++)
-            nodes[0].Add(new MapNode(MapNodeType.Monster));
+        {
+            MapNode firstLevelNode = new MapNode(MapNodeType.Monster);
+            firstLevelNode.active = true;
+            nodes[0].Add(firstLevelNode);
+        }
+            
         //添加第二层到第六层结点
         for(int i = 1;i < 6;i++)
         {
@@ -190,5 +200,20 @@ public class MapInfo
         }
         Debug.Log(s.ToString() );
         
+    }
+
+    public void RevertNode( MapNode node )
+    {
+        for(int i=0;i<nodes.Count; i++)
+        {
+            for(int j = 0; j < nodes[i].Count;j++)
+            {
+                if (nodes[i][j] == node)
+                {
+                    nodes[i][j].selected = false;
+                    nodes[i][j].active = true;
+                }
+            }
+        }
     }
 }

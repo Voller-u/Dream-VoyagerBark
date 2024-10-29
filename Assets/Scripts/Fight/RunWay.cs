@@ -24,10 +24,14 @@ public struct Runner:IComparable<Runner>
 
     public int CompareTo(Runner other)
     {
-        if(this.leftJourney == other.leftJourney && chara is Character)
+        if(this.leftJourney == other.leftJourney)
         {
-            return -1;
+            if (chara is Role)
+                return -1;
+            else
+                return 1;
         }
+        
         return this.leftJourney.CompareTo(other.leftJourney);
     }
 }

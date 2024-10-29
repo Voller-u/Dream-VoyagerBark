@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
         canvas = GetComponent<Transform>();
         UIDic = new();
 
+        EventManager.Instance.OnSceneLoadEvent += CloseAllUI;
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -97,5 +99,7 @@ public class UIManager : MonoBehaviour
         });
 
     }
+
+    
 
 }

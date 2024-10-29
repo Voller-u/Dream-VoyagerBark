@@ -41,10 +41,14 @@ public class FightManager : MonoBehaviour
         UIManager.Instance.HideUI("MapUI");
 
         //TODO ∂ØÃ¨º”‘ÿπ÷ŒÔ
+        EnemyIncubator.Instance.IncubateEnemy("Slime", 0);
+        EnemyIncubator.Instance.IncubateEnemy("Slime", 2);
 
         ChangeType(FightType.Init);
         ChangeType();
     }
+
+
 
     private void Update()
     {

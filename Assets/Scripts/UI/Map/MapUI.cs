@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapUI : UIBase
 {
-    string path = Application.streamingAssetsPath + "/MapData/map";
+    public string path = Application.streamingAssetsPath + "/MapData/map";
     public MapInfo mapInfo = new MapInfo();
     public List<MapNodeItem> selectedNodes = new List<MapNodeItem>();
     public Transform content;
     public List<List<MapNodeItem>> mapNodeItems = new List<List<MapNodeItem>>();
+
+    public Button closeButton;
     
     private void Awake()
     {
@@ -23,9 +26,12 @@ public class MapUI : UIBase
             Tools.SaveClass<MapInfo>(mapInfo, path);
         }
         
-        
+        mapInfo.RevertNode(mapInfo.curMapNode);
+            
 
         GenerateMap();
+
+        closeButton.onClick.AddListener(Hide);
 
     }
 
@@ -45,6 +51,7 @@ public class MapUI : UIBase
                 MapNodeItem item = node.GetComponent<MapNodeItem>();
                 item.text.text = mapInfo.nodes[i][j].type.ToString();
                 item.mapNode = mapInfo.nodes[i][j];
+                item.Init();
                 curNodes.Add(item);
                 mapNodeItems[i].Add(item);
             }
@@ -71,10 +78,6 @@ public class MapUI : UIBase
             curNodes.Clear();
         }
 
-        for (int i = 0; i < mapNodeItems[0].Count; i++)
-        {
-            mapNodeItems[0][i].Active = true;
-        }
     }
 
     public override void Show()
@@ -97,6 +100,7 @@ public class MapUI : UIBase
             mapNodeItems[mapInfo.curLevelNum][i].Active = false;
         }
         mapInfo.curLevelNum++;
+        mapInfo.curMapNode = null;
     }
 
 }

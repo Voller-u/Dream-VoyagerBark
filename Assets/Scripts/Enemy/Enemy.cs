@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public interface IMonster { }
+public interface IInfernalMob { }
+public interface IBoss { }
 public class Enemy : Character
 {
     public int atk;
@@ -67,9 +70,10 @@ public class Enemy : Character
 
     public virtual void Dead()
     {
-        Destroy(gameObject);
         EnemyManager.Instance.enemyList.Remove(this);
-
+        if (this == EnemyManager.Instance.targetEnemy)
+            EnemyManager.Instance.ChangeTarget();
+        Destroy(gameObject);
     }
 
 }

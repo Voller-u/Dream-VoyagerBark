@@ -17,13 +17,12 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public List<MapNodeItem> nextNodes = new List<MapNodeItem>();
 
-    private bool active;
     public bool Active
     {
         set
         {
-            active = value;
-            if(active)
+            mapNode.active = value;
+            if(value)
             {
                 StartCoroutine(Anim());
             }
@@ -35,8 +34,7 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
         }
     }
 
-    private bool dead;
-    public bool Dead
+    public bool Selected
     {
         set
         {
@@ -48,13 +46,18 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
             {
                 image.color = new Color(255, 255, 255, 127);
             }
-            dead = value;
+            mapNode.selected = value;
         }
     }
 
     private void Awake()
     {
         image = GetComponent<Image>();
+    }
+
+    public void Init()
+    {
+        StartCoroutine(Anim());
     }
 
     private void OnEnable()
@@ -70,7 +73,7 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     IEnumerator Anim()
     {
-        if (active)
+        if (mapNode.active)
         {
             while (true)
             {
@@ -103,7 +106,7 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(!active && !dead)
+        if(!mapNode.active && !mapNode.selected)
         {
             transform.DOScale(1.2f, 0.5f);
         }
@@ -112,7 +115,7 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!active && !dead)
+        if (!mapNode.active && !mapNode.selected)
         {
             transform.DOScale(1f, 0.5f);
         }
@@ -120,12 +123,14 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(active)
+        if(mapNode.active)
         {
             GameManager.Instance.MapEventHandler(mapNode.type);
-            active = false;
-            Dead = true;
-            UIManager.Instance.GetUI<MapUI>("MapUI")?.selectedNodes.Add(this);
+            mapNode.active = false;
+            MapUI map = UIManager.Instance.GetUI<MapUI>("MapUI");
+            map?.selectedNodes.Add(this);
+            map.mapInfo.curMapNode = mapNode;
+            mapNode.selected = true;
             
         }
     }

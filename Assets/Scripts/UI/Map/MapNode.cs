@@ -25,6 +25,9 @@ public class MapNode
     [HideInInspector]
     public List<MapNode> nexts;
 
+    public bool active;
+    public bool selected;
+
     public MapNode(MapNodeType type)
     {
         this.type = type;

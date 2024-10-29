@@ -65,4 +65,15 @@ public class EnemyManager : BaseManager<EnemyManager>
         enemyList = new(OnListCountChange);
     }
 
+    public void ChangeTarget(Enemy target)
+    {
+        targetEnemy = target;
+    }
+
+    public void ChangeTarget()
+    {
+        if(enemyList.Count > 0)
+            targetEnemy = enemyList[0];
+    }
+
 }
