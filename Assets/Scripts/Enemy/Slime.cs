@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Slime : Enemy
 {
+    private Animator anim;
+
+    
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     public override void Hurt(int atk)
     {
         base.Hurt(atk);
@@ -22,7 +31,7 @@ public class Slime : Enemy
         act1.precondition = () => CurHp > maxHp / 2;
         act1.SetAction(() =>
         {
-            RoleManager.Instance.role.Hurt(atk);
+            anim.SetTrigger("Action1");
             Debug.Log("执行行动1");
         });
 
@@ -30,8 +39,20 @@ public class Slime : Enemy
         act2.precondition = () => CurHp <= maxHp / 2;
         act2.SetAction(() =>
         {
-            CurHp += 3;
+            anim.SetTrigger("Action2");
             Debug.Log("执行行动2");
         });
+    }
+
+    public void Attack()
+    {
+        RoleManager.Instance.role.Hurt(atk);
+        //anim.ResetTrigger("Action1");
+    }
+
+    public void AddHealth()
+    {
+        CurHp += 3;
+        //anim.ResetTrigger("Action2");
     }
 }

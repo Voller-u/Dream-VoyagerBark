@@ -12,6 +12,8 @@ public class Enemy : Character
     public int def;
     public int maxHp;
 
+    public bool actOver = false;
+
     public Slider healthSlider;
 
     [SerializeField]
@@ -74,6 +76,11 @@ public class Enemy : Character
         if (this == EnemyManager.Instance.targetEnemy)
             EnemyManager.Instance.ChangeTarget();
         Destroy(gameObject);
+    }
+
+    public void SetActOver()
+    {
+        actOver = true;
     }
 
 }

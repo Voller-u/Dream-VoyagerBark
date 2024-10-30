@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Internal;
 
 public class GameManager : MonoBehaviour
 {
@@ -96,31 +97,37 @@ public class GameManager : MonoBehaviour
     {
         //TODO处理休息事件
         Debug.Log("触发休息");
+        FightManager.Instance.Init();
     }
 
     void BonusEventHandler()
     {
         Debug.Log("触发宝箱");
+        FightManager.Instance.Init();
     }
 
     void MerchantEventHandler()
     {
         Debug.Log("触发商人");
+        FightManager.Instance.Init();
     }
 
     void RefluxEventHandler()
     {
         Debug.Log("触发回流");
+        FightManager.Instance.Init();
     }
 
     void RapidsEventHandler()
     {
         Debug.Log("触发湍流");
+        FightManager.Instance.Init();
     }
 
     void HitRockHandler()
     {
         Debug.Log("触发触礁");
+        FightManager.Instance.Init();
     }
 
     void BossEventHandler()
@@ -137,5 +144,20 @@ public class GameManager : MonoBehaviour
             Tools.SaveClass<MapInfo>(mapUI.mapInfo,mapUI.path);
             Debug.Log("保存地图成功");
         }
+    }
+
+    public Coroutine GameStartCoroutine(IEnumerator routine)
+    {
+        return StartCoroutine(routine);
+    }
+
+    public Coroutine GameStartCoroutine(string methodName, [DefaultValue("null")] object value)
+    {
+        return StartCoroutine(methodName, value);
+    }
+
+    public Coroutine GameStartCoroutine(string methodName)
+    {
+        return StartCoroutine(methodName);
     }
 }

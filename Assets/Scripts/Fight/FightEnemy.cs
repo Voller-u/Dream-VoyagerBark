@@ -9,16 +9,23 @@ public class FightEnemy : FightUnit
         //禁掉玩家对卡牌的交互
         UIManager.Instance.SetInteractableUI("FightUI", false);
 
-        EnemyManager.Instance.actEnemy.InvokeBeginAction();
-
-        EnemyManager.Instance.actEnemy.Act();
-
-        EnemyManager.Instance.actEnemy.InvokeEndAction();
-        FightManager.Instance.ChangeType();
+        GameManager.Instance.GameStartCoroutine(EnemyAct());
     }
 
     public override void OnUpdate()
     {
        
+    }
+
+    IEnumerator EnemyAct()
+    {
+        EnemyManager.Instance.actEnemy.InvokeBeginAction();
+        EnemyManager.Instance.actEnemy.Act();
+        yield return new WaitUntil(() => EnemyManager.Instance.actEnemy.actOver);
+        EnemyManager.Instance.actEnemy.InvokeEndAction();
+
+        EnemyManager.Instance.actEnemy.actOver = false;
+
+        FightManager.Instance.ChangeType();
     }
 }

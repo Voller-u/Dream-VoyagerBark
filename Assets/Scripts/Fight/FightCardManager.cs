@@ -82,6 +82,7 @@ public class FightCardManager : MonoBehaviour
             cardList.Add(card);
             card.Interactable = true;
             obj.transform.SetParent(pocket, false);
+            obj.transform.localScale = Vector3.one;
             obj.SetActive(true);
         }
     }
@@ -97,6 +98,7 @@ public class FightCardManager : MonoBehaviour
         usedCardList.Add(card);
         card.transform.SetParent(pocket.parent, false);
         card.gameObject.SetActive(false);
+        
         card.transform.SetParent(GameObject.Find("TrashCan").transform);
         //TODO ²¥·Å¶¯»­
         //StartCoroutine(RemoveCardCoroutine(card));
