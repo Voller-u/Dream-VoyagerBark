@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
         UIDic = new();
 
         EventManager.Instance.OnSceneLoadEvent += CloseAllUI;
+        //TODO 注册成就完成时的事件
 
         DontDestroyOnLoad(gameObject);
     }

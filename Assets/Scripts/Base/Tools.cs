@@ -17,6 +17,7 @@ public static class Tools
     /// <param name="path">Òª´æ´¢µÄÂ·¾¶</param>
     public static void SaveClass<T>(T t,string path)
     {
+        
         using(MemoryStream ms = new MemoryStream())
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -27,7 +28,16 @@ public static class Tools
             //string content = Encoding.UTF8.GetString(bytes);
 
             //File.WriteAllText(path,Encrypt(content));
-            File.WriteAllBytes(path, Encrypt(bytes));
+            try
+            {
+                File.WriteAllBytes(path, Encrypt(bytes));
+            }
+            catch(DirectoryNotFoundException)
+            {
+                string directoryPath = Path.GetDirectoryName(path);
+                Directory.CreateDirectory(directoryPath);
+                File.WriteAllBytes(path, Encrypt(bytes));
+            }
         }
         
     }
@@ -40,7 +50,17 @@ public static class Tools
         //content = Decrypt(content);
 
         //byte[] bytes = Encoding.UTF8.GetBytes(content);
-        byte[] bytes = File.ReadAllBytes(path);
+        byte[] bytes;
+        try
+        {
+            bytes = File.ReadAllBytes(path);
+        }
+        catch(DirectoryNotFoundException)
+        {
+            string directoryPath = Path.GetDirectoryName(path);
+            Directory.CreateDirectory(directoryPath);
+            bytes = File.ReadAllBytes(path);
+        }
         bytes = Decrypt(bytes);
         using(MemoryStream ms = new MemoryStream(bytes))
         {

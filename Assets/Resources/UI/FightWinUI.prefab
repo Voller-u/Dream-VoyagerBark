@@ -212,6 +212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toNextLevelBtn: {fileID: 4705969694205152509}
+  ButtonText: {fileID: 3120048845414804141}
+  winText: {fileID: 4507955808397974514}
 --- !u!1 &5092565374700105101
 GameObject:
   m_ObjectHideFlags: 0

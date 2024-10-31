@@ -36,6 +36,7 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public bool Selected
     {
+        get => mapNode.selected;
         set
         {
             if(value)

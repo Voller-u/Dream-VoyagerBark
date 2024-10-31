@@ -256,11 +256,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6958f288b4bf0174dbc479d438089674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spd: 1
-  atk: 1
+  spd: 10
+  atk: 100
   def: 5
   maxHp: 66
   healthSlider: {fileID: 1559107340}
+  gold: 0
   curHp: 0
   shield: 0
   maxPower: 3
@@ -1598,7 +1599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 653189334544735529, guid: 16d5a26070d7e604b9b5f6cb97769c35, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3340858888192523134, guid: 16d5a26070d7e604b9b5f6cb97769c35, type: 3}
       propertyPath: m_Pivot.x

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class FightWinUI : UIBase
 {
     public Button toNextLevelBtn;
+    public Text ButtonText;
+
+    public Text winText;
 
     private void Awake()
     {

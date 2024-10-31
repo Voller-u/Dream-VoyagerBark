@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MapUI : UIBase
 {
-    public string path = Application.streamingAssetsPath + "/MapData/map";
+    public static string path = Application.streamingAssetsPath + "/MapData/map";
     public MapInfo mapInfo = new MapInfo();
     public List<MapNodeItem> selectedNodes = new List<MapNodeItem>();
     public Transform content;
@@ -19,12 +19,14 @@ public class MapUI : UIBase
         try
         {
             mapInfo = Tools.ReadClass<MapInfo>(path);
-        }catch(FileNotFoundException)
+        }
+        catch (FileNotFoundException)
         {
             Debug.Log("地图不存在，重新创建");
             mapInfo.InitMap();
-            Tools.SaveClass<MapInfo>(mapInfo, path);
         }
+
+        EventManager.Instance.OnDestroySaveEvent += () => Tools.SaveClass<MapInfo>(mapInfo, path);
         
         mapInfo.RevertNode(mapInfo.curMapNode);
             
@@ -88,7 +90,8 @@ public class MapUI : UIBase
             MapNodeItem node = selectedNodes[^1];
             for(int i=0;i<node.nextNodes.Count;i++)
             {
-                node.nextNodes[i].Active = true;
+                if (!node.nextNodes[i].Selected)
+                    node.nextNodes[i].Active = true;
             }
         }
     }

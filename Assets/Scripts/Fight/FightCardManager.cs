@@ -17,35 +17,35 @@ public class FightCardManager : MonoBehaviour
     /// <summary>
     /// 战斗过程中在牌堆里的卡牌集合
     /// </summary>
-    public List<CardBase> unusedCardList;
+    public List<CardItem> unusedCardList;
     /// <summary>
     /// 战斗过程中在弃牌堆里的卡牌集合
     /// </summary>
-    public List<CardBase> usedCardList;
+    public List<CardItem> usedCardList;
     /// <summary>
     /// 战斗过程中被消耗的的卡牌集合
     /// </summary>
-    public List<CardBase> exhaustedCardList;
+    public List<CardItem> exhaustedCardList;
 
     /// <summary>
     /// 手牌集合
     /// </summary>
-    public List<CardBase> cardList;
+    public List<CardItem> cardList;
 
     public Transform pocket; 
 
 
     public void Init()
     {
-        unusedCardList = new List<CardBase>();
-        usedCardList = new List<CardBase>();
-        exhaustedCardList = new List<CardBase>();
-        cardList = new List<CardBase>();
+        unusedCardList = new List<CardItem>();
+        usedCardList = new List<CardItem>();
+        exhaustedCardList = new List<CardItem>();
+        cardList = new List<CardItem>();
 
         //TODO 优化
         pocket = FindObjectOfType<Pocket>().transform;
 
-        unusedCardList.AddRange(RoleManager.Instance.cardList);
+        unusedCardList.AddRange(RoleManager.Instance.cardItems);
         Tools.Shuffle(unusedCardList);
     }
 
@@ -60,9 +60,9 @@ public class FightCardManager : MonoBehaviour
         {
             unusedCardList.AddRange(usedCardList);
             usedCardList.Clear();
-            Tools.Shuffle<CardBase>(unusedCardList);
+            Tools.Shuffle<CardItem>(unusedCardList);
         }
-        CardBase card = unusedCardList[^1];
+        CardItem card = unusedCardList[^1];
         unusedCardList.RemoveAt(unusedCardList.Count - 1);
         return card.gameObject;
     }
@@ -78,7 +78,7 @@ public class FightCardManager : MonoBehaviour
         for(int i=0;i< num; i++)
         {
             GameObject obj = DrawCard();
-            CardBase card = obj.GetComponent<CardBase>();
+            CardItem card = obj.GetComponent<CardItem>();
             cardList.Add(card);
             card.Interactable = true;
             obj.transform.SetParent(pocket, false);
@@ -93,7 +93,7 @@ public class FightCardManager : MonoBehaviour
     /// <param name="index"></param>
     public void RemoveCard(int index)
     {
-        CardBase card = cardList[index];
+        CardItem card = cardList[index];
         cardList.RemoveAt(index);
         usedCardList.Add(card);
         card.transform.SetParent(pocket.parent, false);
@@ -104,7 +104,7 @@ public class FightCardManager : MonoBehaviour
         //StartCoroutine(RemoveCardCoroutine(card));
     }
 
-    public void RemoveCard(CardBase card)
+    public void RemoveCard(CardItem card)
     {
         for(int i=0;i<cardList.Count;i++)
         {
@@ -116,7 +116,7 @@ public class FightCardManager : MonoBehaviour
         }
     }
 
-    IEnumerator RemoveCardCoroutine(CardBase card)
+    IEnumerator RemoveCardCoroutine(CardItem card)
     {
         yield return null;
         card.gameObject.SetActive(false);

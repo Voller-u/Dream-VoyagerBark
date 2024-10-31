@@ -12,6 +12,24 @@ public class Role : Character
     public Slider healthSlider;
 
     [SerializeField]
+    public int gold;
+    public int Gold
+    {
+        get => gold;
+        set
+        {
+            if(value > gold)
+            {
+                int obtainNum = value - gold;
+                Debug.Log("角色获得金币");
+                EventManager.Instance.OnGoldObtain(obtainNum);
+            }
+            gold = value;
+            EventManager.Instance.OnPropertyChange(this);
+        }
+    }
+
+    [SerializeField]
     protected int curHp;
     public  int CurHp
     {
@@ -24,6 +42,7 @@ public class Role : Character
             {
                 FightManager.Instance.ChangeType(FightType.Lose);
             }
+            EventManager.Instance.OnPropertyChange(this);
         }
     }
     public int shield;
@@ -56,6 +75,7 @@ public class Role : Character
     {
         base.Start();
         CurHp = maxHp;
+        RoleManager.Instance.role = this;
     }
 
     /// <summary>

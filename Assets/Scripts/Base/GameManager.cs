@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.ShowUI<PropertyUI>("PropertyUI");
         UIManager.Instance.ShowUI<MapUI>("MapUI");
+        EventManager.Instance.OnPropertyChange(RoleManager.Instance.role);
     }
 
     public void RoleAddCard(string cardName, int num = 1)
@@ -28,13 +29,15 @@ public class GameManager : MonoBehaviour
         {
             GameObject obj = Instantiate(Resources.Load("Cards/" + cardName) as GameObject);
             obj.SetActive(false);
-            CardBase card = obj.GetComponent<CardBase>();
-            RoleManager.Instance.cardList.Add(card);
+            CardItem card = obj.GetComponent<CardItem>();
+            RoleManager.Instance.cardItems.Add(card);
+            RoleManager.Instance.cardList.Add(card.card);
         }
     }
 
     public void MapEventHandler(MapNodeType type)
     {
+        RoleManager.Instance.SetRoleInfo();
         switch (type)
         {
             case MapNodeType.Random:
@@ -141,7 +144,7 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.S))
         {
             MapUI mapUI = UIManager.Instance.GetUI<MapUI>("MapUI");
-            Tools.SaveClass<MapInfo>(mapUI.mapInfo,mapUI.path);
+            Tools.SaveClass<MapInfo>(mapUI.mapInfo,MapUI.path);
             Debug.Log("保存地图成功");
         }
     }
@@ -159,5 +162,10 @@ public class GameManager : MonoBehaviour
     public Coroutine GameStartCoroutine(string methodName)
     {
         return StartCoroutine(methodName);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnDestroySave();
     }
 }
