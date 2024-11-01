@@ -14,7 +14,7 @@ public class FightPlayer : FightUnit
         //});
         //≥È≈∆
         Debug.Log("¥”≈∆∂—÷–≥È≈∆");
-        FightCardManager.Instance.AddCard();
+        FightCardManager.Instance.AddCard(2);
         UIManager.Instance.SetInteractableUI("FightUI", true);
 
         RoleManager.Instance.role.InvokeBeginAction();

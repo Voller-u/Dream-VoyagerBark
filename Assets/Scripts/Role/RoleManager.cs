@@ -12,14 +12,14 @@ public class RoleManager : BaseManager<RoleManager>
     /// 角色拥有的所有卡牌集合
     /// </summary>
     public List<Card> cardList = new List<Card>();
-    public List<CardItem> cardItems = new List<CardItem>();
 
     public Role role;
-    public RoleInfo roleInfo;
+    public RoleInfo roleInfo = new();
 
     public void Init()
     {
-        GameManager.Instance.RoleAddCard("AttackCard", 3);
+        GameManager.Instance.RoleAddCard(new AttackCard(), 3);
+        GameManager.Instance.RoleAddCard(new DefenceCard(), 3);
     }
 
     public void ObtainGold(int num)

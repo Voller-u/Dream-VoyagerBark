@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public enum CardType
 {
@@ -18,7 +19,20 @@ public enum CardType
 public class CardItem:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     //public CardData data;
-    public Card card;
+    [SerializeField]
+    private Card _card;
+    public Card card
+    {
+        get => _card;
+        set
+        {
+            _card = value;
+            string cardName = _card.GetType().Name;
+            Sprite sprite = Resources.Load<Sprite>("Cards/" + cardName);
+            cardImage.sprite = sprite;
+        }
+    }
+    public Image cardImage;
 
     public bool Interactable = false;
 
@@ -27,7 +41,17 @@ public class CardItem:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
         card.Effect();
     }
 
-    
+    private void Awake()
+    {
+        cardImage = GetComponent<Image>();
+    }
+
+    //private void OnEnable()
+    //{
+    //    string cardName = card.GetType().Name;
+    //    Sprite sprite = Resources.Load<Sprite>("Cards/" + cardName);
+    //    cardImage.sprite = sprite;
+    //}
 
     private int index;
     public void OnPointerEnter(PointerEventData eventData)

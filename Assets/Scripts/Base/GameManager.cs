@@ -23,14 +23,18 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.OnPropertyChange(RoleManager.Instance.role);
     }
 
-    public void RoleAddCard(string cardName, int num = 1)
+    public void RoleAddCard(Card _card, int num = 1)
     {
         for (int i = 0; i < num; i++)
         {
-            GameObject obj = Instantiate(Resources.Load("Cards/" + cardName) as GameObject);
-            obj.SetActive(false);
-            CardItem card = obj.GetComponent<CardItem>();
-            RoleManager.Instance.cardItems.Add(card);
+            //GameObject obj = Instantiate(Resources.Load("Cards/" + cardName) as GameObject);
+            //obj.SetActive(false);
+            //CardItem card = obj.GetComponent<CardItem>();
+            //RoleManager.Instance.cardItems.Add(card);
+            //RoleManager.Instance.cardList.Add(card.card);
+
+            CardItem card = CardPool.Instance.GetCard();
+            card.card = _card;
             RoleManager.Instance.cardList.Add(card.card);
         }
     }

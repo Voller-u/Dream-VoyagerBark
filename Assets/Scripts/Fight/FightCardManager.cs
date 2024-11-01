@@ -17,15 +17,15 @@ public class FightCardManager : MonoBehaviour
     /// <summary>
     /// 战斗过程中在牌堆里的卡牌集合
     /// </summary>
-    public List<CardItem> unusedCardList;
+    public List<Card> unusedCardList;
     /// <summary>
     /// 战斗过程中在弃牌堆里的卡牌集合
     /// </summary>
-    public List<CardItem> usedCardList;
+    public List<Card> usedCardList;
     /// <summary>
     /// 战斗过程中被消耗的的卡牌集合
     /// </summary>
-    public List<CardItem> exhaustedCardList;
+    public List<Card> exhaustedCardList;
 
     /// <summary>
     /// 手牌集合
@@ -37,15 +37,15 @@ public class FightCardManager : MonoBehaviour
 
     public void Init()
     {
-        unusedCardList = new List<CardItem>();
-        usedCardList = new List<CardItem>();
-        exhaustedCardList = new List<CardItem>();
-        cardList = new List<CardItem>();
+        unusedCardList = new();
+        usedCardList = new();
+        exhaustedCardList = new();
+        cardList = new();
 
         //TODO 优化
         pocket = FindObjectOfType<Pocket>().transform;
 
-        unusedCardList.AddRange(RoleManager.Instance.cardItems);
+        unusedCardList.AddRange(RoleManager.Instance.cardList);
         Tools.Shuffle(unusedCardList);
     }
 
@@ -54,17 +54,19 @@ public class FightCardManager : MonoBehaviour
         return unusedCardList.Count > 0;
     }
 
-    public GameObject DrawCard()
+    public CardItem DrawCard()
     {
         if(!HaveCard())
         {
             unusedCardList.AddRange(usedCardList);
             usedCardList.Clear();
-            Tools.Shuffle<CardItem>(unusedCardList);
+            Tools.Shuffle<Card>(unusedCardList);
         }
-        CardItem card = unusedCardList[^1];
+        Card card = unusedCardList[^1];
         unusedCardList.RemoveAt(unusedCardList.Count - 1);
-        return card.gameObject;
+        CardItem cardItem = CardPool.Instance.GetCard();
+        cardItem.card = card;
+        return cardItem;
     }
 
     
@@ -77,13 +79,12 @@ public class FightCardManager : MonoBehaviour
     {
         for(int i=0;i< num; i++)
         {
-            GameObject obj = DrawCard();
-            CardItem card = obj.GetComponent<CardItem>();
+            CardItem card = DrawCard();
             cardList.Add(card);
             card.Interactable = true;
-            obj.transform.SetParent(pocket, false);
-            obj.transform.localScale = Vector3.one;
-            obj.SetActive(true);
+            card.gameObject.transform.SetParent(pocket, false);
+            card.gameObject.transform.localScale = Vector3.one;
+            card.gameObject.SetActive(true);
         }
     }
 
@@ -95,7 +96,7 @@ public class FightCardManager : MonoBehaviour
     {
         CardItem card = cardList[index];
         cardList.RemoveAt(index);
-        usedCardList.Add(card);
+        usedCardList.Add(card.card);
         card.transform.SetParent(pocket.parent, false);
         card.gameObject.SetActive(false);
         
