@@ -8,9 +8,12 @@ public class Pocket : MonoBehaviour
     public int maxCardNum;
 
     [Header("间隔")]
-    public int spacing;
+    public float spacing;
 
     private int previousChildNum;
+
+    public Transform leftBound;
+    public Transform rightBound;
 
     private void OnTransformChildrenChanged()
     {
@@ -21,15 +24,35 @@ public class Pocket : MonoBehaviour
         //卡牌数量改变，需要更新ui
         if(transform.childCount != previousChildNum)
         {
-            if(transform.childCount > 0)
-            {
-                float width = transform.GetChild(0).GetComponent<RectTransform>().rect.width;
-                for(int i=0;i<transform.childCount; i++)
-                {
-                    transform.GetChild(i).transform.localPosition = new Vector3(width / 2 + (width + spacing) * i, 0, 0);
-                }
-            }
+            Refresh(DynamicSpacing());
+            
         }
         previousChildNum = transform.childCount;
+    }
+
+    private float DynamicSpacing()
+    {
+        
+        if (transform.childCount > 8) 
+        {
+            float space = 0;
+            space = (rightBound.transform.localPosition.x - leftBound.transform.localPosition.x) / (transform.childCount - 1);
+            float width = transform.GetChild(0).GetComponent<RectTransform>().rect.width;
+            space -= width;
+            return space;
+        }
+        return spacing;
+    }
+    
+    private void Refresh(float space)
+    {
+        if (transform.childCount > 0)
+        {
+            float width = transform.GetChild(0).GetComponent<RectTransform>().rect.width;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).transform.localPosition = new Vector3(width / 2 + (width + space) * i, 0, 0);
+            }
+        }
     }
 }

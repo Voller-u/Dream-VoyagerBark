@@ -18,8 +18,8 @@ public class RoleManager : BaseManager<RoleManager>
 
     public void Init()
     {
-        GameManager.Instance.RoleAddCard(new AttackCard(), 3);
-        GameManager.Instance.RoleAddCard(new DefenceCard(), 3);
+        GameManager.Instance.RoleAddCard(new AttackCard(), 30);
+        GameManager.Instance.RoleAddCard(new DefenceCard(), 30);
     }
 
     public void ObtainGold(int num)

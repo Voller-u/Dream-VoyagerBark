@@ -46,13 +46,6 @@ public class CardItem:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
         cardImage = GetComponent<Image>();
     }
 
-    //private void OnEnable()
-    //{
-    //    string cardName = card.GetType().Name;
-    //    Sprite sprite = Resources.Load<Sprite>("Cards/" + cardName);
-    //    cardImage.sprite = sprite;
-    //}
-
     private int index;
     public void OnPointerEnter(PointerEventData eventData)
     {

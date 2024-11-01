@@ -12,7 +12,7 @@ public class FightCardManager : MonoBehaviour
     {
         Instance = this;
     }
-
+    public int drawCardNum;
 
     /// <summary>
     /// 战斗过程中在牌堆里的卡牌集合
@@ -37,6 +37,7 @@ public class FightCardManager : MonoBehaviour
 
     public void Init()
     {
+        drawCardNum = 5;
         unusedCardList = new();
         usedCardList = new();
         exhaustedCardList = new();
@@ -97,10 +98,7 @@ public class FightCardManager : MonoBehaviour
         CardItem card = cardList[index];
         cardList.RemoveAt(index);
         usedCardList.Add(card.card);
-        card.transform.SetParent(pocket.parent, false);
-        card.gameObject.SetActive(false);
-        
-        card.transform.SetParent(GameObject.Find("TrashCan").transform);
+        CardPool.Instance.HideCard(card);
         //TODO 播放动画
         //StartCoroutine(RemoveCardCoroutine(card));
     }

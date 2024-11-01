@@ -555,7 +555,7 @@ MonoBehaviour:
   spd: 1
   atk: 1
   def: 1
-  maxHp: 10
+  maxHp: 10000000
   actOver: 0
   healthSlider: {fileID: 1374084090856454130}
   curHp: 0

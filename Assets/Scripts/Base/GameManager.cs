@@ -12,12 +12,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        RoleManager.Instance.Init();
+        
         
     }
 
     private void Start()
     {
+        RoleManager.Instance.Init();
         UIManager.Instance.ShowUI<PropertyUI>("PropertyUI");
         UIManager.Instance.ShowUI<MapUI>("MapUI");
         EventManager.Instance.OnPropertyChange(RoleManager.Instance.role);

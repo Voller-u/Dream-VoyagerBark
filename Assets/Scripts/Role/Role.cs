@@ -45,7 +45,6 @@ public class Role : Character
             EventManager.Instance.OnPropertyChange(this);
         }
     }
-    public int shield;
 
     public int maxPower;
     [SerializeField]
@@ -90,14 +89,23 @@ public class Role : Character
 
     public virtual void Hurt(int damage)
     {
-        int rem = shield - damage;
-        if (rem <= 0)
+        while (damage > 0 && shield.Count > 0)
         {
-            CurHp = Mathf.Clamp(curHp + rem, 0, maxHp);
+            if (damage <= shield[^1].num)
+            {
+                shield[^1].num -= damage;
+                if (shield[^1].num == 0)
+                    shield.RemoveAt(shield.Count - 1);
+            }
+            else
+            {
+                damage -= shield[^1].num;
+                shield.RemoveAt(shield.Count - 1);
+            }
         }
-        else
+        if (damage > 0)
         {
-            shield -= damage;
+            CurHp -= damage;
         }
     }
 }
