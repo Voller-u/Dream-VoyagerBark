@@ -24,7 +24,6 @@ public class FightWinUI : UIBase
             map.Show();
         }
         UIManager.Instance.HideUI("FightWinUI");
-        UIManager.Instance.HideUI("FightUI");
 
         //TODO ¥Ú…®’Ω≥°
     }

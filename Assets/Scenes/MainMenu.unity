@@ -410,6 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievementCenter:
     achievementList: []
+  path: E:/UnityProjects/Dream VoyagerBark/Assets/StreamingAssets/Achievement/achievement
 --- !u!1 &337595362
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +773,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5F00\u59CB\u6E38\u620F"
+  m_Text: "\u5F00\u59CB\u65B0\u6E38\u620F"
 --- !u!222 &527583732
 CanvasRenderer:
   m_ObjectHideFlags: 0

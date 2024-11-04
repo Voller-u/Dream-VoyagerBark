@@ -37,6 +37,47 @@ public class MapUI : UIBase
 
     }
 
+    private void Start()
+    {
+        StartCoroutine(GenerateLines());
+    }
+
+    IEnumerator GenerateLines()
+    {
+        yield return new WaitForSeconds(0.1f);
+        for (int i = 0; i < mapNodeItems.Count - 1; i++)
+        {
+            for (int j = 0; j < mapNodeItems[i].Count; j++)
+            {
+                mapNodeItems[i][j].CreateLine();
+                //if (mapNodeItems[i][j].mapNode.nextNode != null)
+                //{
+                //    Debug.Log("сп");
+                //    for (int k = 0; k < mapNodeItems[i][j].nextNodes.Count; k++)
+                //    {
+                //        if (mapNodeItems[i][j].nextNodes[k].mapNode == mapNodeItems[i][j].mapNode.nextNode)
+                //        {
+                //            Debug.Log("╨ц");
+                //            mapNodeItems[i][j].ShowSolidLine(k);
+                //        }
+                //    }
+                //}
+            }
+        }
+
+        for (int i = 0; i < selectedNodes.Count - 1; i++) 
+        {
+            for(int j = 0; j < selectedNodes[i].nextNodes.Count; j++)
+            {
+                if (selectedNodes[i].nextNodes[j] == selectedNodes[i+1])
+                {
+                    selectedNodes[i].ShowSolidLine(j);
+                    break;
+                }
+            }
+        }
+    }
+
     public void GenerateMap()
     {
         List<MapNodeItem> formalNodes = new List<MapNodeItem>();
@@ -51,7 +92,7 @@ public class MapUI : UIBase
                 GameObject node = Instantiate(Resources.Load<GameObject>("UI/MapNode"));
                 node.transform.SetParent(level);
                 MapNodeItem item = node.GetComponent<MapNodeItem>();
-                item.text.text = mapInfo.nodes[i][j].type.ToString();
+                item.NodeType = mapInfo.nodes[i][j].type.ToString();
                 item.mapNode = mapInfo.nodes[i][j];
                 item.Init();
                 curNodes.Add(item);
@@ -72,38 +113,52 @@ public class MapUI : UIBase
                             }
                         }
                     }
-                    formalNodes[k].CreateLine();
+                    //formalNodes[k].CreateLine();
                 }
             }
             formalNodes.Clear();
             formalNodes.AddRange(curNodes);
             curNodes.Clear();
         }
-
+        for(int i=0;i<mapInfo.selectedNodes.Count;i++)
+        {
+            selectedNodes.Add(GetMapNodeItem(mapInfo.selectedNodes[i]));
+        }
     }
 
     public override void Show()
     {
         base.Show();
-        if(selectedNodes.Count > 0)
+        
+    }
+
+    public void ToNextLayer()
+    {
+        if (selectedNodes.Count > 0)
         {
             MapNodeItem node = selectedNodes[^1];
-            for(int i=0;i<node.nextNodes.Count;i++)
+            for (int i = 0; i < node.nextNodes.Count; i++)
             {
                 if (!node.nextNodes[i].Selected)
                     node.nextNodes[i].Active = true;
             }
         }
-    }
-
-    public void ToNextLayer()
-    {
-        for (int i = 0; i < mapNodeItems[mapInfo.curLevelNum].Count; i++)
-        {
-            mapNodeItems[mapInfo.curLevelNum][i].Active = false;
-        }
         mapInfo.curLevelNum++;
         mapInfo.curMapNode = null;
     }
 
+    private MapNodeItem GetMapNodeItem(MapNode mapNode)
+    {
+        for(int i=0;i<mapNodeItems.Count;i++)
+        {
+            for(int j = 0; j < mapNodeItems[i].Count; j++)
+            {
+                if (mapNodeItems[i][j].mapNode == mapNode)
+                {
+                    return mapNodeItems[i][j];
+                }
+            }
+        }
+        return null;
+    }
 }

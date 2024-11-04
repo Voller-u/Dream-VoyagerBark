@@ -51,7 +51,7 @@ public class Pocket : MonoBehaviour
             float width = transform.GetChild(0).GetComponent<RectTransform>().rect.width;
             for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).transform.localPosition = new Vector3(width / 2 + (width + space) * i, 0, 0);
+                transform.GetChild(i).transform.localPosition = new Vector3(width / 2 + (width + space) * i, -25, 0);
             }
         }
     }

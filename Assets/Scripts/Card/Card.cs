@@ -14,6 +14,7 @@ public class Card
     [Header("角色自身点数费用")]
     public int speicalExpense;
 
+
     private float weight;
 
     public virtual void Effect()

@@ -9,8 +9,8 @@ public class BaseManager<T> where T : new()
     {
         get
         {
-            if (instance == null) instance = new T();
-
+            if(instance == null)
+                instance = new T();
             return instance;
         }
     }

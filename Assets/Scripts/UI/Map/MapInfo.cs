@@ -15,6 +15,8 @@ public class MapInfo
     [HideInInspector]
     public List<List<MapNode>> nodes;
 
+    public List<MapNode> selectedNodes = new List<MapNode>();
+
     /// <summary>
     /// 当前处于的结点
     /// </summary>

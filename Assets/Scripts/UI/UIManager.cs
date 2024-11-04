@@ -44,7 +44,8 @@ public class UIManager : MonoBehaviour
 
             UIDic[uiName] = ui;
         }
-
+        
+        ui.transform.SetAsLastSibling();
         ui.Show();
         return ui;
     }
@@ -56,7 +57,10 @@ public class UIManager : MonoBehaviour
 
     public void HideUI(string uiName)
     {
-        UIDic[uiName]?.Hide();
+        if(UIDic.ContainsKey(uiName))
+        {
+            UIDic[uiName]?.Hide();
+        }
     }
 
     public void SetInteractableUI(string uiName,bool interactable)

@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Ð¡Ê·À³Ä·
+/// </summary>
 public class Slime : Enemy
 {
     private Animator anim;
 
-    
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         anim = GetComponent<Animator>();
     }
 
@@ -46,13 +49,12 @@ public class Slime : Enemy
 
     public void Attack()
     {
-        RoleManager.Instance.role.Hurt(atk);
+        RoleManager.Instance.role.Hurt((int)(2 + 0.2f*atk));
         //anim.ResetTrigger("Action1");
     }
 
     public void AddHealth()
     {
-        CurHp += 3;
-        //anim.ResetTrigger("Action2");
+        CurHp -= (int)(0.1f * CurHp);
     }
 }

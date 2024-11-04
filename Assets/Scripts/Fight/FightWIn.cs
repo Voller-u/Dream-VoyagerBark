@@ -7,6 +7,7 @@ public class FightWIn : FightUnit
 {
     public override void Init()
     {
+        UIManager.Instance.HideUI("FightUI");
         
         FightWinUI fightWinUI = UIManager.Instance.ShowUI<FightWinUI>("FightWinUI") as FightWinUI; ;
 
@@ -20,7 +21,7 @@ public class FightWIn : FightUnit
                 fightWinUI.toNextLevelBtn.onClick.AddListener(() =>
                 {
                     EventManager.Instance.LoadScene("MainMenu");
-                    File.Delete(MapUI.path);
+                    
                 });
                 break;
             case MapNodeType.Monster:

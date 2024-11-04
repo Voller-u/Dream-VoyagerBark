@@ -13,15 +13,21 @@ public class PropertyUI : UIBase
     public Button cards;
     public Button setting;
 
-    public GameObject SettingUI;
-
     private void Awake()
     {
         map.onClick.AddListener(() => UIManager.Instance.ShowUI<MapUI>("MapUI"));
 
         setting.onClick.AddListener(() =>
         {
-            SettingUI.SetActive(!SettingUI.activeSelf);
+            SettingUI settingUI = UIManager.Instance.GetUI<SettingUI>("SettingUI");
+            if (settingUI == null || !settingUI.gameObject.activeSelf)
+            {
+                UIManager.Instance.ShowUI<SettingUI>("SettingUI");
+            }
+            else
+            {
+                UIManager.Instance.HideUI("SettingUI");
+            }
         });
 
         EventManager.Instance.OnPropertyChangeEvent += Refresh;

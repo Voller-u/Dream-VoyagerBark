@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,16 +29,17 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < num; i++)
         {
-            //GameObject obj = Instantiate(Resources.Load("Cards/" + cardName) as GameObject);
-            //obj.SetActive(false);
-            //CardItem card = obj.GetComponent<CardItem>();
-            //RoleManager.Instance.cardItems.Add(card);
-            //RoleManager.Instance.cardList.Add(card.card);
 
             CardItem card = CardPool.Instance.GetCard();
             card.card = _card;
             RoleManager.Instance.cardList.Add(card.card);
         }
+    }
+
+    public void RoleAddCard(string _card, int num = 1)
+    {
+        Type type = Type.GetType(_card);
+        RoleAddCard(Activator.CreateInstance(type) as Card, num);
     }
 
     public void MapEventHandler(MapNodeType type)

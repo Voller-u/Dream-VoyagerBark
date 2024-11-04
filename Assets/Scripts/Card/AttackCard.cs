@@ -46,9 +46,9 @@ public class SweepCard:Card
     public override void Effect()
     {
         int damage = (int)(12 + atk * RoleManager.Instance.role.atk);
-        foreach(Enemy enemy in EnemyManager.Instance.enemyList)
+        for (int i = EnemyManager.Instance.enemyList.Count - 1; i >= 0; i--) 
         {
-            enemy.Hurt(damage);
+            EnemyManager.Instance.enemyList[i].Hurt(damage);
         }
     }
 }

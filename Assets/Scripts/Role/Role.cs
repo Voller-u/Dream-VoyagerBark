@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,14 @@ using UnityEngine.UI;
 
 public class Role : Character
 {
+    public int atkBase;
     public int atk;
+    public int defBase;
     public int def;
     public int maxHp;
 
-    public Slider healthSlider;
+    public RectTransform healthBar;
+    private float healthBarX;
 
     [SerializeField]
     public int gold;
@@ -37,8 +41,8 @@ public class Role : Character
         set
         {
             curHp = Mathf.Clamp(value, 0, maxHp);
-            healthSlider.value = (float)curHp / maxHp;
-            if(curHp <=0)
+            healthBar.localPosition = new Vector3(healthBarX - healthBar.rect.width * (1 - (float)curHp / maxHp), healthBar.localPosition.y, healthBar.localPosition.z);
+            if (curHp <=0)
             {
                 FightManager.Instance.ChangeType(FightType.Lose);
             }
@@ -70,11 +74,21 @@ public class Role : Character
         }
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        RoleManager.Instance.role = this;
+    }
+
     protected new virtual void Start()
     {
         base.Start();
         CurHp = maxHp;
-        RoleManager.Instance.role = this;
+        atk = atkBase;
+        def = defBase;
+        
+
+        healthBarX = healthBar.localPosition.x;
     }
 
     /// <summary>

@@ -67,7 +67,7 @@ public class RunWay:BaseManager<RunWay>
     public void Switch()
     {
         //如果最前面的选手刚跑完，应放到最后去
-        if (runners.Count >0 && runners[0].leftJourney == 0)
+        if (runners.Count >0)
         {
             var runner = runners[0];
             runner.leftJourney = lapShift;
@@ -86,6 +86,7 @@ public class RunWay:BaseManager<RunWay>
             runner.leftJourney = Mathf.Clamp(runners[i].leftJourney - runners[i].chara.spd * time, 0, int.MaxValue);
             runners[i] = runner;
         }
+        Print();
         runners.Sort();
     }
     
@@ -108,7 +109,7 @@ public class RunWay:BaseManager<RunWay>
         StringBuilder s = new StringBuilder();
         for(int i=0;i<runners.Count; i++)
         {
-            s.Append("name: " + runners[i].chara.name + "\n" + "left: " + runners[i].leftJourney +"\n\n");
+            s.Append("name: " + runners[i].chara.name + "\n" + "left: " + runners[i].leftJourney +"\n\n" + "speed: " + runners[i].chara.spd);
         }
         Debug.Log(s.ToString());
     }

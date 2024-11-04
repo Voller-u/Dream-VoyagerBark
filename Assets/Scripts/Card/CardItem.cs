@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public enum CardType
 {
@@ -36,6 +37,8 @@ public class CardItem:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
 
     public bool Interactable = false;
 
+    private CardTip _cardTip;
+
     public virtual void Effect()
     {
         card.Effect();
@@ -49,15 +52,25 @@ public class CardItem:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     private int index;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.DOScale(1.5f, 0.25f);
+        transform.DOScale(2f, 0.25f);
         index = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
+        _cardTip =  Instantiate(Resources.Load("UI/CardTip"),transform).GetComponent<CardTip>();
+        
+        if(CardDataManager.Instance.cardTipDic.ContainsKey(card.GetType().Name))
+        {
+            _cardTip.Init(CardDataManager.Instance.cardTipDic[card.GetType().Name]);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.DOScale(1f, 0.25f);
         transform.SetSiblingIndex(index);
+        if(_cardTip != null)
+        {
+            Destroy(_cardTip.gameObject);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)

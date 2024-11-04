@@ -45,7 +45,25 @@ public class EnemyManager : BaseManager<EnemyManager>
     /// <summary>
     /// 选中的目标敌人
     /// </summary>
-    public Enemy targetEnemy;
+    [SerializeField]
+    private Enemy _targetEnemy;
+    public Enemy targetEnemy
+    {
+        get => _targetEnemy;
+        set
+        {
+            _targetEnemy = value;
+            _targetEnemy.sprite.material = _targetEnemy.targetMaterial;
+
+            for(int i = 0;i<enemyList.Count;i++)
+            {
+                if (enemyList[i] != targetEnemy)
+                {
+                    enemyList[i].sprite.material = enemyList[i].normalMaterial;
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// 行动的敌人

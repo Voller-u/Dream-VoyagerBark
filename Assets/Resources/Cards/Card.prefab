@@ -88,8 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e27de84378d06340953d65b8ac45bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card:
+  _card:
     type: 0
     normalExpense: 0
     speicalExpense: 0
+  cardImage: {fileID: 0}
   Interactable: 0

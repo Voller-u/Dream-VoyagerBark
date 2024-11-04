@@ -28,6 +28,12 @@ public class MapNode
     public bool active;
     public bool selected;
 
+    /// <summary>
+    /// 确定好的下一个结点
+    /// </summary>
+    [SerializeField]
+    public MapNode nextNode;
+
     public MapNode(MapNodeType type)
     {
         this.type = type;

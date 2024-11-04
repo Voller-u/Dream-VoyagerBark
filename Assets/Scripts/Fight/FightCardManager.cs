@@ -17,31 +17,34 @@ public class FightCardManager : MonoBehaviour
     /// <summary>
     /// 战斗过程中在牌堆里的卡牌集合
     /// </summary>
-    public List<Card> unusedCardList;
+    public List<Card> unusedCardList = new List<Card>();
     /// <summary>
     /// 战斗过程中在弃牌堆里的卡牌集合
     /// </summary>
-    public List<Card> usedCardList;
+    public List<Card> usedCardList = new List<Card>();
     /// <summary>
     /// 战斗过程中被消耗的的卡牌集合
     /// </summary>
-    public List<Card> exhaustedCardList;
+    public List<Card> exhaustedCardList = new List<Card>();
 
     /// <summary>
     /// 手牌集合
     /// </summary>
-    public List<CardItem> cardList;
+    public List<CardItem> cardList = new List<CardItem>();
 
     public Transform pocket; 
 
 
     public void Init()
     {
+
+
         drawCardNum = 5;
-        unusedCardList = new();
-        usedCardList = new();
-        exhaustedCardList = new();
-        cardList = new();
+        unusedCardList.Clear();
+        usedCardList.Clear();
+        exhaustedCardList.Clear();
+        RemoveAllCards();
+        cardList.Clear();
 
         //TODO 优化
         pocket = FindObjectOfType<Pocket>().transform;

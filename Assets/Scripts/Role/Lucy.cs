@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Voyager : Role
+public class Lucy : Role
 {
-    
 
 
     private void OnEnable()

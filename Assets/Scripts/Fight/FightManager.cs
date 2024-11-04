@@ -42,6 +42,8 @@ public class FightManager : MonoBehaviour
 
         //TODO 动态加载怪物
         EnemyIncubator.Instance.IncubateEnemy("Slime", 0);
+        //EnemyIncubator.Instance.IncubateEnemy("NightMareBeast", 1);
+        
 
         ChangeType(FightType.Init);
         ChangeType();
@@ -79,7 +81,7 @@ public class FightManager : MonoBehaviour
                 break;
             case FightType.Enemy:
                 fightUnit = new FightEnemy();
-                Debug.Log("敌人回合");
+                //Debug.Log("敌人回合");
                 break;
             case FightType.Win:
                 fightUnit = new FightWIn();

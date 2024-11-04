@@ -8,13 +8,24 @@ public interface IInfernalMob { }
 public interface IBoss { }
 public class Enemy : Character
 {
+    public int atkBase;
     public int atk;
+    public int defBase;
     public int def;
     public int maxHp;
 
     public bool actOver = false;
 
-    public Slider healthSlider;
+    public RectTransform healthBar;
+    private float healthBarX;
+
+    public GameObject parentGameObject;
+
+    [HideInInspector]
+    public Material normalMaterial;
+    public Material targetMaterial;
+    [HideInInspector]
+    public SpriteRenderer sprite;
 
     [SerializeField]
     private int curHp;
@@ -24,8 +35,9 @@ public class Enemy : Character
         set
         {
             curHp = Mathf.Clamp(value, 0, maxHp);
-            healthSlider.value = (float)curHp / maxHp;
+            
 
+            healthBar.localPosition = new Vector3(healthBarX - healthBar.rect.width * (1-(float)curHp / maxHp), healthBar.localPosition.y, healthBar.localPosition.z);
             if(curHp <=0)
             {
                 //¹ÖÎïËÀÍö
@@ -36,15 +48,26 @@ public class Enemy : Character
 
     public BTNode root;
 
+
     protected new virtual void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
+        normalMaterial = sprite.material;
         base.Start();
         CurHp = maxHp;
+        atk = atkBase;
+        def = defBase;
         EnemyManager.Instance.enemyList.Add(this);
         EnemyManager.Instance.targetEnemy = this;
 
         InitBT();
+
+        healthBarX = healthBar.localPosition.x;
+
+        
     }
+
+    
 
     public virtual void Hurt(int damage)
     {
@@ -83,7 +106,7 @@ public class Enemy : Character
         EnemyManager.Instance.enemyList.Remove(this);
         if (this == EnemyManager.Instance.targetEnemy)
             EnemyManager.Instance.ChangeTarget();
-        Destroy(gameObject);
+        Destroy(parentGameObject);
     }
 
     public void SetActOver()
