@@ -125,13 +125,22 @@ public class GameManager : MonoBehaviour
     void RefluxEventHandler()
     {
         Debug.Log("触发回流");
-        FightManager.Instance.Init();
+        MapUI map = UIManager.Instance.GetUI<MapUI>("MapUI");
+        Debug.Log(map.mapInfo.curLevelNum - 1);
+        for (int i = 0; i < map.mapNodeItems[map.mapInfo.curLevelNum - 1].Count; i++)
+        {
+            map.mapNodeItems[map.mapInfo.curLevelNum - 1][i].Active = true;
+        }
     }
 
     void RapidsEventHandler()
     {
         Debug.Log("触发湍流");
-        FightManager.Instance.Init();
+        MapUI map = UIManager.Instance.GetUI<MapUI>("MapUI");
+        for(int i = 0; i < map.mapNodeItems[map.mapInfo.curLevelNum].Count;i++)
+        {
+            map.mapNodeItems[map.mapInfo.curLevelNum][i].Active = true;
+        }
     }
 
     void HitRockHandler()

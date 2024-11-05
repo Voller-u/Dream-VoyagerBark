@@ -31,6 +31,7 @@ public class CardPool : MonoBehaviour
     {
         card.transform.SetParent(transform);
         card.gameObject.SetActive(false);
+        card.SetDefault();
         cards.Add(card);
     }
 }

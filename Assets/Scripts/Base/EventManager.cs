@@ -47,4 +47,10 @@ public class EventManager : BaseManager<EventManager>
         Debug.Log("获得金币事件调用");
         OnGoldObtainEvent?.Invoke(obtainNum);
     }
+
+    public event UnityAction<Card> OnCardPlayEvent;
+    public void OnCardPlay(Card card)
+    {
+        OnCardPlayEvent?.Invoke(card);
+    }
 }

@@ -9,6 +9,11 @@ public class FightUI : UIBase
     public Text usedCardNum;
     public Button endRoundButton;
 
+    private void Awake()
+    {
+        EventManager.Instance.OnPropertyChangeEvent += OnPropertyChange;
+    }
+
     private void Start()
     {
         endRoundButton.onClick.AddListener(() =>
@@ -43,5 +48,15 @@ public class FightUI : UIBase
     public override void SetInteractable(bool interactable)
     {
         endRoundButton.interactable = interactable;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Instance.OnPropertyChangeEvent -= OnPropertyChange;
+    }
+
+    public void OnPropertyChange(Role role)
+    {
+
     }
 }

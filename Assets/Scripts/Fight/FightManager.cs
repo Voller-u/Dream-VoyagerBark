@@ -42,8 +42,8 @@ public class FightManager : MonoBehaviour
 
         //TODO ∂ØÃ¨º”‘ÿπ÷ŒÔ
         EnemyIncubator.Instance.IncubateEnemy("Slime", 0);
-        //EnemyIncubator.Instance.IncubateEnemy("NightMareBeast", 1);
-        
+        EnemyIncubator.Instance.IncubateEnemy("Slime", 1);
+
 
         ChangeType(FightType.Init);
         ChangeType();

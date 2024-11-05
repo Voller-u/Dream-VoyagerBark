@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.PlayerLoop;
 
 [Serializable]
 public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
@@ -42,13 +43,14 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
         set
         {
             mapNode.active = value;
-            if(value && gameObject.activeInHierarchy)
+            if(value && !Selected)
             {
-                StartCoroutine(Anim());
+                Debug.Log("---");
+                //StartCoroutine(Anim());
             }
             else
             {
-                StopCoroutine(Anim());
+                //StartCoroutine(StopAnim());
                 transform.localScale = Vector3.one;
                 if(!Selected)
                 {
@@ -80,36 +82,18 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
         image = GetComponent<Image>();
     }
 
-    public void Init()
-    {
-        StartCoroutine(Anim());
-    }
-
-    private void OnEnable()
-    {
-        StartCoroutine(Anim());
-    }
-
-    private void OnDisable()
-    {
-        StopCoroutine(Anim());
-        transform.localScale = Vector3.one;
-    }
-
     IEnumerator Anim()
     {
-        if (mapNode.active)
-        {
-            while (true)
+            while (mapNode.active && !Selected)
             {
                 transform.DOScale(1.5f, 0.5f);
                 yield return new WaitForSeconds(0.5f);
                 transform.DOScale(1f, 0.5f);
                 yield return new WaitForSeconds(0.5f);
             }
-        }
         
     }
+
 
     public void CreateLine()
     {
@@ -174,12 +158,14 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
     {
         if(mapNode.active)
         {
-            GameManager.Instance.MapEventHandler(mapNode.type);
-            mapNode.active = false;
+            
+            Active = false;
             
             MapUI map = UIManager.Instance.GetUI<MapUI>("MapUI");
 
-            for(int i = 0; i < map.mapNodeItems[map.mapInfo.curLevelNum].Count;i++)
+            map.mapInfo.curLevelNum = map.GetMapNodeItemLayer(this);
+
+            for (int i = 0; i < map.mapNodeItems[map.mapInfo.curLevelNum].Count;i++)
             {
                 map.mapNodeItems[map.mapInfo.curLevelNum][i].Active = false;
             }
@@ -201,8 +187,9 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
             map?.selectedNodes.Add(this);
             map.mapInfo.selectedNodes.Add(this.mapNode);
             map.mapInfo.curMapNode = mapNode;
-            mapNode.selected = true;
-            
+            Selected = true;
+
+            GameManager.Instance.MapEventHandler(mapNode.type);
         }
     }
 
@@ -212,12 +199,27 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
         solidLines[index].SetActive(true);
     }
 
+    private Coroutine animCoroutine;
     private void Update()
     {
-        //²âÊÔÓÃ
-        if(Input.GetKeyDown(KeyCode.P))
+        if(mapNode.active && !Selected)
         {
-            Debug.Log(transform.position);
+            if(gameObject.activeInHierarchy)
+            {
+                if(animCoroutine == null )
+                    animCoroutine = StartCoroutine(Anim());
+            }
+        }
+        else
+        {
+            if (gameObject.activeInHierarchy)
+            {
+                if(animCoroutine != null)
+                    StopCoroutine(Anim());
+                animCoroutine = null;
+
+            }
+            
         }
     }
 }

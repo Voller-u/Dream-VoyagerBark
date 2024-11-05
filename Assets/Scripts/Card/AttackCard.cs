@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IAttackCard { }
+
 /// <summary>
 /// ¹¥»÷ÅÆ
 /// </summary>
 [Serializable]
-public class AttackCard : Card
+public class AttackCard : Card, IAttackCard
 {
 
     [Header("¹¥»÷±¶ÂÊ")]
@@ -24,7 +26,7 @@ public class AttackCard : Card
 /// ÖØÅü
 /// </summary>
 [Serializable]
-public class HeavyChopCard : Card
+public class HeavyChopCard : Card, IAttackCard
 {
     public float atk = 0.2f;
 
@@ -39,7 +41,7 @@ public class HeavyChopCard : Card
 /// ºáÉ¨
 /// </summary>
 [Serializable]
-public class SweepCard:Card
+public class SweepCard: Card, IAttackCard
 {
     public float atk = 0.05f;
 

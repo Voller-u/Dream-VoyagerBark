@@ -78,24 +78,15 @@ public class CardItem:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
         if(!Interactable)
             return;
         Effect();
-        //switch(type)
-        //{
-        //    case CardType.ATK:
-        //        Effect(EnemyManager.Instance.targetEnemy);
-        //        break;
-        //    case CardType.MulAtk:
-        //        Effect(EnemyManager.Instance.enemyList);
-        //        break;
-        //    case CardType.DEF:
-        //        Effect();
-        //        break;
-        //    case CardType.SKL:
-        //        Effect();
-        //        break;
-        //    case CardType.BUFF:
-        //        Effect();
-        //        break;
-        //}
         FightCardManager.Instance.RemoveCard(this);
+    }
+
+    public void SetDefault()
+    {
+        transform.localScale = Vector3.one;
+        if (_cardTip != null)
+        {
+            Destroy(_cardTip.gameObject);
+        }
     }
 }

@@ -94,7 +94,6 @@ public class MapUI : UIBase
                 MapNodeItem item = node.GetComponent<MapNodeItem>();
                 item.NodeType = mapInfo.nodes[i][j].type.ToString();
                 item.mapNode = mapInfo.nodes[i][j];
-                item.Init();
                 curNodes.Add(item);
                 mapNodeItems[i].Add(item);
             }
@@ -123,6 +122,12 @@ public class MapUI : UIBase
         for(int i=0;i<mapInfo.selectedNodes.Count;i++)
         {
             selectedNodes.Add(GetMapNodeItem(mapInfo.selectedNodes[i]));
+        }
+
+        if(mapInfo.curLevelNum == 0)
+        {
+            for(int i = 0; i < mapNodeItems[0].Count;i++)
+                mapNodeItems[0][i].Active = true;
         }
     }
 
@@ -160,5 +165,20 @@ public class MapUI : UIBase
             }
         }
         return null;
+    }
+
+    public int GetMapNodeItemLayer(MapNodeItem mapNodeItem)
+    {
+        for (int i = 0; i < mapNodeItems.Count; i++)
+        {
+            for (int j = 0; j < mapNodeItems[i].Count; j++)
+            {
+                if (mapNodeItems[i][j] == mapNodeItem)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 }

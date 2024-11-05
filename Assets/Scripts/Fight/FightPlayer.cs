@@ -24,7 +24,6 @@ public class FightPlayer : FightUnit
     {
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Êó±ê°´ÏÂ");
             Vector3 screenPos =Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(screenPos, Vector2.zero, 100f, 1 << LayerMask.NameToLayer("Enemy"));
             if(hit)
