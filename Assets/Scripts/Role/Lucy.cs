@@ -8,7 +8,37 @@ public class Lucy : Role
     /// <summary>
     /// 打出的攻击牌的数量
     /// </summary>
-    public int atkNum;
+    private int atkNum;
+
+    public int AtkNum
+    {
+        get => atkNum;
+
+        set
+        {
+            atkNum = Mathf.Clamp(value, 0, int.MaxValue);
+            if(atkNum >=8)
+            {
+                activeSkillButton.interactable = true;
+            }
+        }
+    }
+
+    private int sixAwnStarNum;
+
+    public int SixAwnStarNum
+    {
+        get => sixAwnStarNum;
+        set => sixAwnStarNum = value;
+    }
+
+    private int eightAwnStarNum;
+
+    public int EightAwnStarNum
+    {
+        get => eightAwnStarNum;
+        set => eightAwnStarNum = value;
+    }
 
     protected override void Start()
     {
@@ -23,16 +53,22 @@ public class Lucy : Role
         EventManager.Instance.OnCardPlayEvent -= OnCardPlay;
     }
 
-    public void ProactiveSkill()
-    {
-
-    }
 
     public void OnCardPlay(Card card)
     {
         if(card is IAttackCard)
         {
-            atkNum++;
+            AtkNum++;
+        }
+    }
+
+    public override void InvokeActiveSkill()
+    {
+        Debug.Log("释放主动技能");
+        AtkNum -= 8;
+        if (AtkNum < 8) 
+        {
+            activeSkillButton.interactable = false;
         }
     }
 

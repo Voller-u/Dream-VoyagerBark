@@ -78,6 +78,7 @@ public class CardItem:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
         if(!Interactable)
             return;
         Effect();
+        EventManager.Instance.OnCardPlay(card);
         FightCardManager.Instance.RemoveCard(this);
     }
 

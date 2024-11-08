@@ -53,4 +53,10 @@ public class EventManager : BaseManager<EventManager>
     {
         OnCardPlayEvent?.Invoke(card);
     }
+
+    public event UnityAction OnSpecialPowerConsumeEvent;
+    public void OnSpecialPowerConsume()
+    {
+        OnSpecialPowerConsumeEvent?.Invoke();
+    }
 }

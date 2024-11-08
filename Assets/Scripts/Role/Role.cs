@@ -74,6 +74,8 @@ public class Role : Character
         }
     }
 
+    public Button activeSkillButton;
+
     protected override void Awake()
     {
         base.Awake();
@@ -89,6 +91,8 @@ public class Role : Character
         
 
         healthBarX = healthBar.localPosition.x;
+
+        activeSkillButton.onClick.AddListener(InvokeActiveSkill);
     }
 
     /// <summary>
@@ -122,4 +126,9 @@ public class Role : Character
             CurHp -= damage;
         }
     }
+
+    public virtual void InvokeActiveSkill()
+    {
+
+    }    
 }
