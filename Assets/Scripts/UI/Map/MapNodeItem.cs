@@ -45,7 +45,6 @@ public class MapNodeItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
             mapNode.active = value;
             if(value && !Selected)
             {
-                Debug.Log("---");
                 //StartCoroutine(Anim());
             }
             else

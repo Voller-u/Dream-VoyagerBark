@@ -90,6 +90,7 @@ public class FightCardManager : MonoBehaviour
             card.gameObject.transform.localScale = Vector3.one;
             card.gameObject.SetActive(true);
         }
+        SoundManager.Instance.PlaySound(Global.DrawCardSound,SoundManager.Instance.SoundVolume);
     }
 
     /// <summary>

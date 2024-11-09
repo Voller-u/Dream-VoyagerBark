@@ -32,6 +32,11 @@ public class MainMenuUI : UIBase
             File.Delete(RoleManager.path);
         });
 
+        SettingButton.onClick.AddListener(() =>
+        {
+            UIManager.Instance.ShowUI<SettingUI>("SettingUI");
+        });
+
 
         ExitGameButton.onClick.AddListener(() =>
         {

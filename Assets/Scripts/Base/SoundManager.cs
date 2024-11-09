@@ -10,17 +10,42 @@ public class SoundManager : MonoBehaviour
     private AudioSource audioSource;
     // 
     private Dictionary<string, AudioClip> dictAudio;
+
+    private float _BGMVolume = 1f;
+    public float BGMVolume
+    {
+        set
+        {
+            _BGMVolume = value;
+            audioSource.volume = _BGMVolume;
+        }
+    }
+    public float SoundVolume = 1f;
+
     private void Awake()
     {
         Instance = this;
         audioSource = GetComponent<AudioSource>();
         dictAudio = new Dictionary<string, AudioClip>();
+
+        PlayBGM(Global.MainMenuBGM);
+
+        DontDestroyOnLoad(gameObject);
+
+        EventManager.Instance.OnSceneLoadEvent2 += (string sceneName) =>
+        {
+            if (sceneName.Equals("Game"))
+                PlayBGM(Global.MainMenuBGM);
+            else if (sceneName.Equals("MainMenu"))
+                PlayBGM(Global.MainMenuBGM);
+        };
     }
 
     // 辅助函数： 加载音频，需要确保音频文件的路径在Resources文件夹下
     public AudioClip LoadAudio(string path)
     {
-        return (AudioClip)Resources.Load(path);
+        var clip = Resources.Load<AudioClip>(path);
+        return clip;
     }
 
     // 辅助函数：获取音频，并且将其缓存在dictAudio中，避免重复加载
@@ -28,7 +53,11 @@ public class SoundManager : MonoBehaviour
     {
         if (!dictAudio.ContainsKey(path))
         {
-            dictAudio[path] = LoadAudio(path);
+            AudioClip clip = LoadAudio(path);
+            if (clip != null)
+                dictAudio[path] = clip;
+            else
+                return null;
         }
         return dictAudio[path];
     }
@@ -37,6 +66,8 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.Stop();
         audioSource.clip = GetAudio(name);
+
+        audioSource.volume = volume;
         audioSource.Play();
 
     }
@@ -72,4 +103,5 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.Stop();
     }
+
 }

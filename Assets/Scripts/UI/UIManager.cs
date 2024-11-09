@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     {
         if(Instance != null)
         {
+            Instance.CloseAllUI();
             Destroy(Instance.gameObject);
         }
         Instance = this;
@@ -22,7 +23,11 @@ public class UIManager : MonoBehaviour
         canvas = GetComponent<Transform>();
         UIDic = new();
 
-        EventManager.Instance.OnSceneLoadEvent += CloseAllUI;
+        EventManager.Instance.OnSceneLoadEvent += () =>
+        {
+            CloseAllUI();
+            ShowUI<MainMenuUI>("MainMenuUI");
+        };
         //TODO 注册成就完成时的事件
 
         DontDestroyOnLoad(gameObject);

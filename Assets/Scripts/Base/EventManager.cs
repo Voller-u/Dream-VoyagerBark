@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class EventManager : BaseManager<EventManager>
 {
     public event UnityAction OnSceneLoadEvent;
+    public event UnityAction<string> OnSceneLoadEvent2;
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
         OnSceneLoadEvent?.Invoke();
+        OnSceneLoadEvent2?.Invoke(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
     public void LoadScene(int sceneBuildIndex)
     {
