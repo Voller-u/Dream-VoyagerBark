@@ -1,0 +1,10 @@
+remote_theme: pages-themes/architect@v0.2.0
+plugins:
+- jekyll-remote-theme 
+
+title: [浮梦舟项目介绍]
+
+show_downloads: [true]
+
+github:
+  zip_url: https://gitee.com/Volerai/Dream-VoyagerBark/releases/download/V1.0.5/Dream%20VoyagerBark_v1.5.zip
